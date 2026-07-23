@@ -170,20 +170,6 @@
   padding: 24px 0;
 }
 
-.cardLink {
-  display: flex;
-  text-decoration: none;
-  color: inherit;
-  height: 100%;
-  width: 100%;
-}
-
-.cardLink:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 4px;
-  border-radius: 16px;
-}
-
 .photoLayout {
   display: grid;
   grid-template-columns: 1.4fr 1fr;

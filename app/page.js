@@ -80,9 +80,7 @@ export default function HomePage() {
           <div className={styles.projectGrid}>
             {featured.map((p) => (
               <ScrollReveal key={p.slug} delay={0.05}>
-                <Link href={`/projects/${p.slug}`} className={styles.cardLink}>
-                  <ProjectCard project={p} />
-                </Link>
+                <ProjectCard project={p} href={`/projects/${p.slug}`} />
               </ScrollReveal>
             ))}
           </div>

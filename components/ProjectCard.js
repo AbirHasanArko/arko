@@ -1,13 +1,15 @@
 'use client';
 
 import { useRef } from 'react';
+import Link from 'next/link';
 import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import { classNames } from '@/lib/utils';
 import styles from './ProjectCard.module.css';
 
 const MAX_TILT = 8;
 
-export default function ProjectCard({ project }) {
+export default function ProjectCard({ project, href }) {
+  const cardHref = href || (project.slug ? `/projects/${project.slug}` : null);
   const ref = useRef(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -61,7 +63,15 @@ export default function ProjectCard({ project }) {
         </div>
       </div>
 
-      <h3 className={styles.title}>{project.name}</h3>
+      {cardHref ? (
+        <h3 className={styles.title}>
+          <Link href={cardHref} className={styles.titleLink}>
+            {project.name}
+          </Link>
+        </h3>
+      ) : (
+        <h3 className={styles.title}>{project.name}</h3>
+      )}
       <p className={styles.description}>{project.description}</p>
 
       <ul className={styles.tech} aria-label={`${project.name} tech stack`}>
