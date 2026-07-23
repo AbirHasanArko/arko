@@ -2,6 +2,7 @@ import { profile } from '@/data/profile';
 import { getSocialIcon } from '@/lib/icons';
 import ContactForm from '@/components/ContactForm';
 import WireframeCube from '@/components/WireframeCube';
+import CodeFloat from '@/components/CodeFloat';
 import ScrollReveal from '@/components/ScrollReveal';
 import styles from './page.module.css';
 
@@ -42,24 +43,32 @@ export default function ContactPage() {
         <ScrollReveal delay={0.1}>
           <aside className={styles.sidebar}>
             <div className={styles.cubeWrap}>
-              <WireframeCube size={120} />
+              <CodeFloat count={10} />
+              <WireframeCube size={96} variant="core" />
             </div>
 
-            <div className={styles.info}>
-              <p className={styles.infoLabel}>email</p>
-              <a href={`mailto:${profile.email}`} className={styles.infoLink}>
-                {profile.email}
-              </a>
-            </div>
-            <div className={styles.info}>
-              <p className={styles.infoLabel}>phone</p>
-              <a href={`tel:${profile.phone.replace(/[^+\d]/g, '')}`} className={styles.infoLink}>
-                {profile.phone}
-              </a>
-            </div>
-            <div className={styles.info}>
-              <p className={styles.infoLabel}>location</p>
-              <p className={styles.infoText}>{profile.location}</p>
+            <p className={styles.statusRow}>
+              <span className={styles.statusDot} aria-hidden="true" />
+              <span>Open to opportunities</span>
+            </p>
+
+            <div className={styles.infoBlock}>
+              <div className={styles.info}>
+                <p className={styles.infoLabel}>email</p>
+                <a href={`mailto:${profile.email}`} className={styles.infoLink}>
+                  {profile.email}
+                </a>
+              </div>
+              <div className={styles.info}>
+                <p className={styles.infoLabel}>phone</p>
+                <a href={`tel:${profile.phone.replace(/[^+\d]/g, '')}`} className={styles.infoLink}>
+                  {profile.phone}
+                </a>
+              </div>
+              <div className={styles.info}>
+                <p className={styles.infoLabel}>location</p>
+                <p className={styles.infoText}>{profile.location}</p>
+              </div>
             </div>
 
             <p className={styles.socialsHeading}>// elsewhere</p>
@@ -75,7 +84,7 @@ export default function ContactPage() {
                       className={styles.socialLink}
                     >
                       {Icon ? <Icon className={styles.socialIcon} /> : null}
-                      {s.label}
+                      <span>{s.label}</span>
                     </a>
                   </li>
                 );

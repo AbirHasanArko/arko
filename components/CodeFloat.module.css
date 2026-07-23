@@ -1,0 +1,53 @@
+.layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.glyph {
+  position: absolute;
+  bottom: -10%;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--accent);
+  text-shadow: 0 0 8px rgba(232, 168, 124, 0.45);
+  filter: blur(0.6px);
+  white-space: nowrap;
+  animation-name: codeRise;
+  /* ease-in-out matches the deceleration feel of the cube's spin */
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes codeRise {
+  0% {
+    transform:
+      translate(0, 0)
+      rotate(0deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: var(--glyph-opacity, 0.2);
+  }
+  50% {
+    transform:
+      translate(calc(var(--drift, 0) - var(--sway, 0px)), -50vh)
+      rotate(6deg);
+  }
+  85% {
+    opacity: var(--glyph-opacity, 0.2);
+  }
+  100% {
+    transform:
+      translate(calc(var(--drift, 0) + var(--sway, 0px)), -100vh)
+      rotate(-4deg);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glyph { animation: none; opacity: 0.25; }
+}

@@ -5,6 +5,7 @@ import { profile } from '@/data/profile';
 import GlitchText from './GlitchText';
 import WireframeCube from './WireframeCube';
 import ScanlineOverlay from './ScanlineOverlay';
+import CodeFloat from './CodeFloat';
 import Counter from './Counter';
 import ScrollReveal from './ScrollReveal';
 import styles from './Hero.module.css';
@@ -85,6 +86,7 @@ export default function Hero() {
     <section className={styles.hero}>
       <div className={styles.bg} aria-hidden="true">
         <WireframeCube size={260} />
+        <CodeFloat count={18} />
         <ScanlineOverlay />
       </div>
 
