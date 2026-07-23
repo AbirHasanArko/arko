@@ -8,6 +8,10 @@ import { projects } from '@/data/projects';
 import { experience } from '@/data/academics';
 import styles from './page.module.css';
 
+export const metadata = {
+  title: 'Home · Abir Hasan Arko',
+};
+
 export default function HomePage() {
   const featured = projects.filter((p) => p.featured).slice(0, 4);
   const recentWork = experience.filter((e) => e.current).slice(0, 3);
