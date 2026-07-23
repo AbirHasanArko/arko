@@ -9,6 +9,7 @@ import {
   useRef,
   useState,
 } from 'react';
+import CrtScanlines from './CrtScanlines';
 import styles from './ThemeProvider.module.css';
 
 const STORAGE_KEY = 'arko-theme';
@@ -152,6 +153,7 @@ export default function ThemeProvider({ children }) {
   return (
     <ThemeContext.Provider value={value}>
       {children}
+      <CrtScanlines />
       <div
         ref={overlayRef}
         className={styles.overlay}
