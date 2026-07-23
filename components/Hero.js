@@ -87,8 +87,9 @@ export default function Hero() {
       <div className={styles.bg} aria-hidden="true">
         <WireframeCube size={260} />
         <CodeFloat count={18} />
-        <ScanlineOverlay />
       </div>
+
+      <ScanlineOverlay />
 
       <div className={styles.content}>
         <ScrollReveal>
