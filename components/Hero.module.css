@@ -1,0 +1,182 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 96px 24px 80px;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(232, 168, 124, 0.12), transparent 55%),
+    radial-gradient(circle at 80% 70%, rgba(107, 143, 113, 0.1), transparent 50%),
+    var(--bg);
+  isolation: isolate;
+}
+
+.bg {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 0;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.greeting {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+  margin: 0 0 8px;
+}
+
+.cursorPrompt { color: var(--text-muted); margin-right: 6px; }
+
+.name {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 8vw, 88px);
+  line-height: 1.05;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
+  color: var(--text);
+  min-height: 1em;
+}
+
+.typed { color: var(--text); }
+
+.cursor {
+  display: inline-block;
+  width: 0.55ch;
+  margin-left: 4px;
+  background: var(--accent);
+  height: 0.95em;
+  vertical-align: -0.12em;
+  animation: blink 1.05s steps(2, end) infinite;
+  transition: opacity 360ms ease;
+}
+
+.cursorDone {
+  animation: blink 1.4s steps(2, end) infinite;
+}
+
+.cursorOff {
+  animation: none;
+  opacity: 0;
+  transition: opacity 320ms ease 280ms;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.roles {
+  font-family: var(--font-mono);
+  font-size: clamp(16px, 2.4vw, 22px);
+  color: var(--text-muted);
+  margin: 0 0 18px;
+}
+
+.roleLabel {
+  color: var(--accent);
+  margin-right: 8px;
+}
+
+.roleText { color: var(--text); }
+.roleCursor {
+  display: inline-block;
+  margin-left: 4px;
+  color: var(--accent);
+  animation: blink 1s steps(2, end) infinite;
+}
+
+.tagline {
+  font-size: clamp(15px, 1.6vw, 17px);
+  color: var(--text-muted);
+  max-width: 640px;
+  margin: 0 0 36px;
+  line-height: 1.6;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  max-width: 720px;
+  margin: 0 0 36px;
+}
+
+.stat {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+}
+
+.statNum {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.1;
+}
+
+.statLabel {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 6px;
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.ctaPrimary,
+.ctaGhost {
+  display: inline-block;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  text-decoration: none;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.ctaPrimary {
+  background: var(--bg-dark);
+  color: var(--accent);
+  border: 1px solid var(--bg-dark);
+}
+
+.ctaPrimary:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--accent);
+}
+
+.ctaGhost {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.ctaGhost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+@media (max-width: 640px) {
+  .hero { padding: 64px 20px 56px; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+}

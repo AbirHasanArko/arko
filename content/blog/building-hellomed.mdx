@@ -1,0 +1,42 @@
+---
+title: "Building HelloMed: Lessons From a Hospital Management System"
+date: "2025-04-03"
+excerpt: "Designing relational schemas, integrating LLMs, and the small details that make healthcare software actually usable."
+tags: ["Laravel", "Healthcare", "Backend"]
+readingTime: "8 min read"
+---
+
+## Why hospital software is hard
+
+Software for healthcare has constraints most apps don't: audit trails, role separation, and zero
+tolerance for silent data corruption. Building
+[HelloMed](https://github.com/AbirHasanArko/HelloMed) taught me to think in **workflows**, not screens.
+
+## The relational schema
+
+The trick is to model the **encounter**, not the patient. Each visit, prescription, and lab order
+belongs to a specific encounter, which keeps history clean and audit logs straightforward.
+
+```
+patients ──< encounters ──< prescriptions
+                  │
+                  └──< lab_orders ──< lab_results
+```
+
+## AI-assisted recommendations — carefully
+
+I integrated an Ollama-powered recommendation engine that suggests differential diagnoses based on
+symptoms. Important constraints:
+
+- The AI **suggests**, never decides.
+- Every suggestion is logged with the prompt and model version.
+- Doctors can override with one click, and the override is part of the audit trail.
+
+## What I'd do differently
+
+If I started again, I'd build the **event log first**. Healthcare software is unforgiving when you
+can't reconstruct what happened.
+
+## TL;DR
+
+Schema first, audit log first, AI last. Then layer the UI on top.

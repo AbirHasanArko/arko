@@ -1,0 +1,31 @@
+---
+title: "Embedding Demos and Linking in Posts"
+date: "2025-09-12"
+excerpt: "How I add live demos, YouTube clips, and styled links to blog posts on this site."
+tags: ["MDX", "Next.js", "Tutorial"]
+readingTime: "4 min read"
+---
+
+## Links, internal and external
+
+Plain `[text](url)` still works — but external links now open in a new tab with a small ↗ glyph, and internal links route through Next.js for fast navigation. See the [home page](/) or my [GitHub](https://github.com/AbirHasanArko) for examples.
+
+## Embedded YouTube
+
+Drop a YouTube embed URL straight into the post:
+
+<iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Demo video" />
+
+The wrapper preserves 16:9 aspect ratio, lazy-loads the iframe, and only grants sensible permissions.
+
+## A live Hugging Face Space
+
+For AI projects I often embed the running space so readers can poke at it without leaving the post. Use a taller `height` for app-style demos:
+
+<iframe src="https://arko-hasan-ai-function-validator.hf.space" title="AI Function Validator (live)" height="640" />
+
+## Smaller, fixed-height embeds
+
+<iframe src="https://codepen.io/team/codepen/embed/preview/PNaGbb" title="CodePen demo" height="360" />
+
+That's the whole API — write MDX as usual, and the custom `a` and `iframe` components take it from there.

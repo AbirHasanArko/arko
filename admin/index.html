@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio Admin · Abir Hasan Arko</title>
+  <style>
+    :root {
+      --bg: #F5F0E8;
+      --bg-dark: #1A1A2E;
+      --text: #1A1A2E;
+      --text-muted: #6B6B76;
+      --accent: #E8A87C;
+      --accent-hover: #D4956A;
+      --secondary: #6B8F71;
+      --surface: #FEFCF7;
+      --border: #D4CFC4;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+      --font-display: 'Playfair Display', Georgia, serif;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    header {
+      background: var(--bg-dark);
+      color: var(--accent);
+      padding: 16px 24px;
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+    }
+    header small {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: 400;
+      margin-top: 2px;
+    }
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 920px) { main { grid-template-columns: 1fr; } }
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .panel h2 {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin: 0 0 16px;
+    }
+    label {
+      display: block;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--bg);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    textarea { resize: vertical; min-height: 80px; font-family: var(--font-mono); }
+    textarea.code { font-size: 12px; min-height: 320px; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    button {
+      padding: 10px 16px;
+      border: 1px solid var(--bg-dark);
+      border-radius: 6px;
+      background: var(--bg-dark);
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      cursor: pointer;
+      transition: transform 0.12s ease;
+    }
+    button:hover { transform: translate(-1px, -1px); box-shadow: 2px 2px 0 var(--accent); }
+    button.ghost { background: transparent; color: var(--text); border-color: var(--border); }
+    button.ghost:hover { box-shadow: 2px 2px 0 var(--accent); border-color: var(--accent); }
+    .actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    .project-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; max-height: 240px; overflow-y: auto; }
+    .project-item {
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--bg);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+    .project-item button { padding: 4px 10px; font-size: 11px; }
+    .preview-actions { display: flex; gap: 8px; margin-bottom: 8px; }
+    .preview-actions .toast {
+      margin-left: auto;
+      color: var(--secondary);
+      font-size: 12px;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .preview-actions .toast.show { opacity: 1; }
+    .help {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin: -8px 0 12px;
+      line-height: 1.5;
+    }
+    .help kbd {
+      background: var(--bg);
+      padding: 1px 6px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-size: 11px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    Abir Hasan Arko · Portfolio Admin
+    <small>// local CMS — drafts autosave to localStorage · excluded from Vercel deploy</small>
+  </header>
+
+  <main>
+    <section class="panel">
+      <h2>// projects</h2>
+      <div id="project-list" class="project-list"></div>
+
+      <div class="row">
+        <div>
+          <label for="p-name">name</label>
+          <input id="p-name" type="text" placeholder="HelloMed" />
+        </div>
+        <div>
+          <label for="p-emoji">emoji</label>
+          <input id="p-emoji" type="text" placeholder="🏥" maxlength="4" />
+        </div>
+      </div>
+      <label for="p-desc">description</label>
+      <textarea id="p-desc" placeholder="Short description..."></textarea>
+      <div class="row">
+        <div>
+          <label for="p-tech">tech (comma-separated)</label>
+          <input id="p-tech" type="text" placeholder="PHP, Laravel, SQLite" />
+        </div>
+        <div>
+          <label for="p-category">category</label>
+          <select id="p-category">
+            <option value="Web">Web</option>
+            <option value="AI">AI</option>
+            <option value="Python">Python</option>
+            <option value="Java">Java</option>
+            <option value="C++">C++</option>
+            <option value="Hardware">Hardware</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label for="p-github">github</label>
+          <input id="p-github" type="text" placeholder="https://github.com/..." />
+        </div>
+        <div>
+          <label for="p-live">live (optional)</label>
+          <input id="p-live" type="text" placeholder="https://..." />
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label for="p-date">date</label>
+          <input id="p-date" type="text" placeholder="2025" />
+        </div>
+        <div>
+          <label for="p-featured">featured</label>
+          <select id="p-featured">
+            <option value="false">false</option>
+            <option value="true">true</option>
+          </select>
+        </div>
+      </div>
+      <div class="actions">
+        <button id="add-project">Add / Update Project</button>
+        <button class="ghost" id="clear-form">Clear form</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>// live preview · data/projects.js</h2>
+      <div class="preview-actions">
+        <button id="copy-projects">Copy to clipboard</button>
+        <button class="ghost" id="clear-projects">Clear all</button>
+        <span class="toast" id="copy-toast">Copied ✓</span>
+      </div>
+      <textarea id="preview" class="code" readonly></textarea>
+      <p class="help">
+        Paste this entire block into <kbd>data/projects.js</kbd> (replace the
+        existing <kbd>projects</kbd> array). Keep the <kbd>export const allTech</kbd>
+        line intact — it's auto-derived.
+      </p>
+    </section>
+
+    <section class="panel">
+      <h2>// blog post (MDX)</h2>
+      <div class="row">
+        <div>
+          <label for="b-title">title</label>
+          <input id="b-title" type="text" placeholder="Post title" />
+        </div>
+        <div>
+          <label for="b-date">date (YYYY-MM-DD)</label>
+          <input id="b-date" type="text" placeholder="2025-07-01" />
+        </div>
+      </div>
+      <label for="b-excerpt">excerpt</label>
+      <textarea id="b-excerpt" placeholder="One-sentence summary."></textarea>
+      <div class="row">
+        <div>
+          <label for="b-tags">tags (comma-separated)</label>
+          <input id="b-tags" type="text" placeholder="AI, Backend" />
+        </div>
+        <div>
+          <label for="b-reading">reading time</label>
+          <input id="b-reading" type="text" placeholder="5 min read" />
+        </div>
+      </div>
+      <label for="b-slug">slug (filename)</label>
+      <input id="b-slug" type="text" placeholder="my-post-slug" />
+      <label for="b-body">body (MDX)</label>
+      <textarea id="b-body" class="code" placeholder="## Heading\n\nYour content here..."></textarea>
+      <div class="preview-actions">
+        <button id="copy-blog">Copy MDX</button>
+        <button class="ghost" id="clear-blog">Clear</button>
+        <span class="toast" id="blog-toast">Copied ✓</span>
+      </div>
+      <p class="help">
+        Save as <kbd>content/blog/&lt;slug&gt;.mdx</kbd> and commit. The slug
+        becomes the URL: <kbd>/blog/&lt;slug&gt;</kbd>.
+      </p>
+    </section>
+  </main>
+
+  <script>
+    const STORAGE_KEY = 'portfolio-admin-state-v1';
+
+    function loadState() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || { projects: [] };
+      } catch {
+        return { projects: [] };
+      }
+    }
+
+    function saveState(state) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function slugify(value) {
+      return String(value || '').toLowerCase().trim()
+        .replace(/[^\w\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-');
+    }
+
+    function renderProjects() {
+      const state = loadState();
+      const list = document.getElementById('project-list');
+      list.innerHTML = '';
+      if (state.projects.length === 0) {
+        list.innerHTML = '<p style="color:var(--text-muted);font-size:12px;margin:0;">No projects yet.</p>';
+      }
+      state.projects.forEach((p, i) => {
+        const item = document.createElement('div');
+        item.className = 'project-item';
+        item.innerHTML = `
+          <span><strong>${p.emoji || '·'}</strong> ${p.name}
+            <small style="color:var(--text-muted);"> · ${p.category}</small>
+          </span>
+          <div>
+            <button data-action="edit" data-i="${i}">edit</button>
+            <button class="ghost" data-action="del" data-i="${i}">del</button>
+          </div>
+        `;
+        list.appendChild(item);
+      });
+      renderPreview();
+    }
+
+    function renderPreview() {
+      const state = loadState();
+      const output = `export const projects = ${JSON.stringify(state.projects, null, 2)};\n`;
+      document.getElementById('preview').value = output;
+    }
+
+    function fillForm(p) {
+      document.getElementById('p-name').value = p.name || '';
+      document.getElementById('p-emoji').value = p.emoji || '';
+      document.getElementById('p-desc').value = p.description || '';
+      document.getElementById('p-tech').value = (p.tech || []).join(', ');
+      document.getElementById('p-category').value = p.category || 'Web';
+      document.getElementById('p-github').value = p.github || '';
+      document.getElementById('p-live').value = p.live || '';
+      document.getElementById('p-date').value = p.date || '';
+      document.getElementById('p-featured').value = p.featured ? 'true' : 'false';
+    }
+
+    function readForm() {
+      return {
+        name: document.getElementById('p-name').value.trim(),
+        emoji: document.getElementById('p-emoji').value.trim(),
+        description: document.getElementById('p-desc').value.trim(),
+        tech: document.getElementById('p-tech').value.split(',').map(s => s.trim()).filter(Boolean),
+        category: document.getElementById('p-category').value,
+        github: document.getElementById('p-github').value.trim() || null,
+        live: document.getElementById('p-live').value.trim() || null,
+        date: document.getElementById('p-date').value.trim() || String(new Date().getFullYear()),
+        featured: document.getElementById('p-featured').value === 'true',
+        status: 'shipped',
+      };
+    }
+
+    function flashToast(id) {
+      const toast = document.getElementById(id);
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 1400);
+    }
+
+    document.getElementById('add-project').addEventListener('click', () => {
+      const project = readForm();
+      if (!project.name) { alert('Name is required'); return; }
+      const state = loadState();
+      const existing = state.projects.findIndex(p => p.name === project.name);
+      if (existing >= 0) state.projects[existing] = project;
+      else state.projects.push(project);
+      saveState(state);
+      renderProjects();
+    });
+
+    document.getElementById('clear-form').addEventListener('click', () => {
+      fillForm({});
+    });
+
+    document.getElementById('project-list').addEventListener('click', (e) => {
+      const btn = e.target.closest('button');
+      if (!btn) return;
+      const state = loadState();
+      const i = parseInt(btn.dataset.i, 10);
+      if (btn.dataset.action === 'edit') {
+        fillForm(state.projects[i]);
+      } else if (btn.dataset.action === 'del') {
+        if (confirm(`Delete ${state.projects[i].name}?`)) {
+          state.projects.splice(i, 1);
+          saveState(state);
+          renderProjects();
+        }
+      }
+    });
+
+    document.getElementById('copy-projects').addEventListener('click', async () => {
+      await navigator.clipboard.writeText(document.getElementById('preview').value);
+      flashToast('copy-toast');
+    });
+
+    document.getElementById('clear-projects').addEventListener('click', () => {
+      if (confirm('Clear all projects?')) {
+        saveState({ projects: [] });
+        renderProjects();
+      }
+    });
+
+    // Blog MDX generator
+    function buildMdx() {
+      const title = document.getElementById('b-title').value.trim();
+      const date = document.getElementById('b-date').value.trim();
+      const excerpt = document.getElementById('b-excerpt').value.trim();
+      const tags = document.getElementById('b-tags').value.split(',').map(s => s.trim()).filter(Boolean);
+      const reading = document.getElementById('b-reading').value.trim() || '5 min read';
+      const slug = slugify(document.getElementById('b-slug').value || title);
+      const body = document.getElementById('b-body').value.trim();
+      const fm = [
+        '---',
+        `title: "${title.replace(/"/g, '\\"')}"`,
+        `date: "${date}"`,
+        `excerpt: "${excerpt.replace(/"/g, '\\"')}"`,
+        `tags: [${tags.map(t => `"${t}"`).join(', ')}]`,
+        `readingTime: "${reading}"`,
+        '---',
+        '',
+        body,
+        '',
+      ].join('\n');
+      return { slug, mdx: fm };
+    }
+
+    document.getElementById('copy-blog').addEventListener('click', async () => {
+      const { mdx } = buildMdx();
+      if (!mdx.startsWith('---')) {
+        alert('Fill in at least the title field.');
+        return;
+      }
+      await navigator.clipboard.writeText(mdx);
+      flashToast('blog-toast');
+    });
+
+    document.getElementById('clear-blog').addEventListener('click', () => {
+      ['b-title','b-date','b-excerpt','b-tags','b-reading','b-slug','b-body']
+        .forEach(id => { document.getElementById(id).value = ''; });
+    });
+
+    renderProjects();
+  </script>
+</body>
+</html>

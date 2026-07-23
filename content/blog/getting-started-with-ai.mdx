@@ -1,0 +1,60 @@
+---
+title: "Getting Started with AI Function Calling"
+date: "2025-06-12"
+excerpt: "What function calling really does, why structured outputs matter, and how to build a validation pipeline that won't bite you in production."
+tags: ["AI", "LLM", "Engineering"]
+readingTime: "6 min read"
+---
+
+## Why function calling changed my workflow
+
+I used to write brittle regex parsers to extract intent from language model responses. Then I tried
+**function calling**, and the entire validation problem inverted: instead of parsing strings, the model
+returns JSON that conforms to a schema you define.
+
+> The hardest part isn't the model — it's the gap between a well-typed schema and a real database.
+
+This post walks through the lessons I learned building
+[AI Function Validator](https://github.com/AbirHasanArko/AI-Function-Validator).
+
+## The pipeline
+
+A clean function-calling system has four stages:
+
+1. **Schema definition** — define tools with Pydantic / Zod / typed wrappers.
+2. **Generation** — let the model emit a structured tool call.
+3. **Validation** — check JSON schema, types, function registry, and dangerous payloads.
+4. **Execution** — run the validated call against real infrastructure.
+
+## What breaks in production
+
+- **Type drift** — the model returns `"5"` instead of `5`.
+- **Hallucinated tools** — the model invents a function that isn't registered.
+- **SQL injection** — even "validated" inputs need parameterized queries.
+- **Silent failures** — null values that pass schema validation but break downstream code.
+
+## How I defend against this
+
+```python
+class ToolCall(BaseModel):
+    name: str
+    args: dict
+
+    @validator("name")
+    def name_must_be_registered(cls, v):
+        if v not in REGISTRY:
+            raise ValueError(f"Unknown tool: {v}")
+        return v
+```
+
+Combine schema validation with **runtime guards** and **dataset quality checks**. The output should
+look like data you'd trust to ship.
+
+## Takeaways
+
+- Define schemas early. Refactor types before refactoring prompts.
+- Treat every LLM output as untrusted input — same posture as a public API.
+- Log every tool call. You'll thank yourself when debugging a midnight outage.
+
+If you're building with LLMs, start with a tiny function registry and grow it. Ship the validator
+before you ship the model.
