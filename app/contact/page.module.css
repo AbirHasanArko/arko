@@ -23,6 +23,9 @@
   display: grid;
   place-items: center;
   margin: -8px -8px 16px;
+  /* size (120) + 2 * translateZ (200) + breathing room */
+  min-height: 560px;
+  pointer-events: none;
 }
 
 .info { margin-bottom: 16px; }
