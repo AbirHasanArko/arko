@@ -1,7 +1,6 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import Link from 'next/link';
 import ProjectCard from '@/components/ProjectCard';
 import FilterBar from '@/components/FilterBar';
 import ScrollReveal from '@/components/ScrollReveal';
@@ -51,9 +50,7 @@ export default function ProjectsPage() {
         <div className={styles.grid}>
           {filtered.map((p, i) => (
             <ScrollReveal key={p.slug} delay={i * 0.05}>
-              <Link href={`/projects/${p.slug}`} className={styles.cardLink}>
-                <ProjectCard project={p} />
-              </Link>
+              <ProjectCard project={p} href={`/projects/${p.slug}`} />
             </ScrollReveal>
           ))}
         </div>
