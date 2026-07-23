@@ -1,4 +1,5 @@
 :root {
+  /* Light theme (default) */
   --bg: #F5F0E8;
   --bg-dark: #1A1A2E;
   --text: #1A1A2E;
@@ -10,11 +11,51 @@
   --border: #D4CFC4;
   --code-bg: #2D2D3F;
 
+  /* Internal lighting tokens — used for components hard-coded in CSS */
+  --shadow-color: rgba(26, 26, 46, 0.12);
+  --shadow-strong: rgba(26, 26, 46, 0.28);
+  --dot-grid: rgba(26, 26, 46, 0.05);
+  --noise-overlay: rgba(26, 26, 46, 0.025);
+  --surface-tint: rgba(232, 168, 124, 0.1);
+  --surface-tint-strong: rgba(232, 168, 124, 0.18);
+  --selection-bg: var(--accent);
+  --selection-fg: var(--bg-dark);
+  --bar-bg: var(--bg-dark);
+
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
   --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
   --font-body: var(--font-mono);
 
+  --theme-transition: background-color 600ms ease, color 600ms ease,
+    border-color 600ms ease, box-shadow 600ms ease;
+
   color-scheme: light;
+}
+
+[data-theme='dark'] {
+  /* Dark theme — keeps the retro-minimal feel, inverts paper → ink */
+  --bg: #13131F;
+  --bg-dark: #0A0A14;
+  --text: #ECE5D5;
+  --text-muted: #9892A8;
+  --accent: #F0B489;
+  --accent-hover: #E8A87C;
+  --secondary: #88AE8A;
+  --surface: #1B1B2A;
+  --border: #2A2A3D;
+  --code-bg: #0E0E18;
+
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --shadow-strong: rgba(0, 0, 0, 0.7);
+  --dot-grid: rgba(240, 180, 137, 0.06);
+  --noise-overlay: rgba(240, 180, 137, 0.02);
+  --surface-tint: rgba(240, 180, 137, 0.12);
+  --surface-tint-strong: rgba(240, 180, 137, 0.22);
+  --selection-bg: var(--accent);
+  --selection-fg: var(--bg-dark);
+  --bar-bg: var(--text);
+
+  color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
@@ -22,7 +63,7 @@
 html, body {
   margin: 0;
   padding: 0;
-  background: #F5F0E8;
+  background: var(--bg);
   color: var(--text);
   font-family: var(--font-body);
   font-size: 16px;
@@ -35,27 +76,29 @@ html, body {
 
 body {
   background-image:
-    radial-gradient(circle at 1px 1px, rgba(26, 26, 46, 0.05) 1px, transparent 0);
+    radial-gradient(circle at 1px 1px, var(--dot-grid) 1px, transparent 0);
   background-size: 24px 24px;
   background-attachment: fixed;
-  background-color: #F5F0E8;
+  background-color: var(--bg);
   min-height: 100vh;
+  transition: var(--theme-transition);
 }
 
 main {
   padding-top: calc(64px + env(safe-area-inset-top, 0px));
-  background: #F5F0E8;
+  background: var(--bg);
+  transition: var(--theme-transition);
 }
 
-main > *:first-child { background: #F5F0E8; }
+main > *:first-child { background: var(--bg); }
 
 a { color: inherit; }
 
 img, svg, video, canvas { max-width: 100%; height: auto; }
 
 ::selection {
-  background: var(--accent);
-  color: var(--bg-dark);
+  background: var(--selection-bg);
+  color: var(--selection-fg);
 }
 
 button { font-family: inherit; }
@@ -67,6 +110,7 @@ h1, h2, h3, h4, h5 {
   color: var(--text);
   margin: 0;
   line-height: 1.15;
+  transition: var(--theme-transition);
 }
 
 p { margin: 0; }
@@ -236,6 +280,13 @@ p { margin: 0; }
   background: var(--accent);
   z-index: 100;
   transition: width 80ms linear;
+}
+
+/* Theme transition smoothing — applies to common shells, cards, surfaces. */
+@media (prefers-reduced-motion: no-preference) {
+  header, footer, article, section, nav, main, aside {
+    transition: var(--theme-transition);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

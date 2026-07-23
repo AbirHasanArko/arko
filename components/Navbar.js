@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { profile } from '@/data/profile';
 import { navigation } from '@/data/navigation';
+import ThemeToggle from './ThemeToggle';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
@@ -52,6 +53,9 @@ export default function Navbar() {
                 </li>
               );
             })}
+            <li>
+              <ThemeToggle />
+            </li>
           </ul>
         </nav>
 

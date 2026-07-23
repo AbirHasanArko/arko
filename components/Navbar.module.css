@@ -4,9 +4,9 @@
   left: 0;
   right: 0;
   z-index: 50;
-  background: #F5F0E8;
+  background: var(--bg);
   border-bottom: 1px solid transparent;
-  transition: border-color 200ms ease;
+  transition: border-color 200ms ease, background-color 600ms ease;
   padding-top: env(safe-area-inset-top, 0px);
 }
 
@@ -127,7 +127,7 @@
 
 .link:hover {
   color: var(--accent);
-  background: rgba(232, 168, 124, 0.1);
+  background: var(--surface-tint);
 }
 
 .active {
@@ -163,7 +163,7 @@
   height: 2px;
   width: 100%;
   background: var(--text);
-  transition: transform 220ms ease, opacity 220ms ease;
+  transition: transform 220ms ease, opacity 220ms ease, background-color 600ms ease;
 }
 
 .bar1Open { transform: translateY(6px) rotate(45deg); }
@@ -175,12 +175,12 @@
   .nav {
     position: fixed;
     inset: calc(64px + env(safe-area-inset-top, 0px)) 0 auto 0;
-    background: #F5F0E8;
+    background: var(--bg);
     border-bottom: 1px solid var(--border);
     transform: translateY(-110%);
     visibility: hidden;
     opacity: 0;
-    transition: transform 240ms ease, visibility 0s linear 240ms, opacity 240ms ease;
+    transition: transform 240ms ease, visibility 0s linear 240ms, opacity 240ms ease, background-color 600ms ease, border-color 600ms ease;
     padding: 8px 24px 16px;
   }
   .open {
