@@ -2,6 +2,10 @@
  * Hero-band CRT scanlines. Lives as a direct child of `.hero` so it sits
  * above the WireframeCube (inside `.bg` at z-index: 0) and below the
  * foreground text (`.content` at z-index: 2). Confined to the hero region.
+ *
+ * Intensity is theme-adaptive: light mode shows a soft whisper of texture so
+ * it doesn't fight the cream palette, while dark mode shows bolder black
+ * lines that read against the deeper ink background.
  */
 
 .scanlines {
@@ -11,8 +15,8 @@
   z-index: 1;
   background-image: repeating-linear-gradient(
     0deg,
-    rgba(0, 0, 0, 0.18) 0px,
-    rgba(0, 0, 0, 0.18) 1px,
+    rgba(0, 0, 0, 0.10) 0px,
+    rgba(0, 0, 0, 0.10) 1px,
     transparent 1px,
     transparent 4px
   );
