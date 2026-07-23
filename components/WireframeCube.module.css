@@ -52,8 +52,17 @@
   border-radius: 50%;
   overflow: hidden;
   padding: 12%;
-  background: var(--cube-core-bg);
-  box-shadow: var(--cube-core-shadow);
+  background:
+    radial-gradient(
+      circle at 35% 35%,
+      rgba(232, 168, 124, 0.55),
+      rgba(232, 168, 124, 0.22) 45%,
+      rgba(232, 168, 124, 0) 75%
+    );
+  box-shadow:
+    0 0 14px rgba(232, 168, 124, 0.18),
+    0 0 28px rgba(232, 168, 124, 0.08),
+    inset 0 0 8px rgba(232, 168, 124, 0.12);
   transition: background 600ms ease, box-shadow 600ms ease;
 }
 
@@ -62,8 +71,8 @@
   font-size: clamp(10px, 16%, 16px);
   font-weight: 800;
   letter-spacing: 0.5px;
-  color: var(--cube-core-fg, #1A1A2E);
-  text-shadow: var(--cube-core-text-shadow, 0 1px 0 rgba(255, 255, 255, 0.55));
+  color: #1A1A2E;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.55);
   max-width: 100%;
   max-height: 100%;
   text-align: center;
@@ -73,6 +82,7 @@
   word-break: break-word;
   hyphens: auto;
   animation: labelSwap 1.5s ease-in-out;
+  transition: color 600ms ease, text-shadow 600ms ease, opacity 600ms ease;
 }
 
 @keyframes labelSwap {
