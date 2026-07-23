@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  width: 100%;
   padding: 22px;
   border: 1px solid var(--border);
   border-radius: 14px;
@@ -12,7 +13,13 @@
   perspective: 1000px;
 }
 
-.card:hover {
+.card:has(.titleLink:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.card:hover,
+.card:has(.titleLink:focus-visible) {
   border-color: var(--accent);
   box-shadow: 6px 6px 0 var(--accent);
 }
@@ -67,9 +74,15 @@
   color: var(--text);
 }
 
+.titleAsText {
+  position: relative;
+  display: inline-block;
+}
+
 .titleLink {
-  color: inherit;
+  color: var(--text);
   text-decoration: none;
+  transition: color 160ms ease;
   background-image: linear-gradient(currentColor, currentColor);
   background-size: 0% 1px;
   background-repeat: no-repeat;
@@ -77,9 +90,16 @@
   transition: background-size 220ms ease, color 160ms ease;
 }
 
-.titleLink:hover {
+.card:hover .titleLink,
+.card:has(.titleLink:focus-visible) .titleLink {
   color: var(--accent);
   background-size: 100% 1px;
+}
+
+.titleOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
 }
 
 .description {
@@ -138,3 +158,8 @@
 }
 
 .link:hover { color: var(--accent-hover); }
+
+.linkRelative {
+  position: relative;
+  z-index: 2;
+}

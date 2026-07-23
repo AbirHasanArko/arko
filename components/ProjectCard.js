@@ -64,8 +64,13 @@ export default function ProjectCard({ project, href }) {
       </div>
 
       {cardHref ? (
-        <h3 className={styles.title}>
-          <Link href={cardHref} className={styles.titleLink}>
+        <h3 className={classNames(styles.title, styles.titleAsText)}>
+          <Link
+            href={cardHref}
+            className={styles.titleLink}
+            aria-label={`Open ${project.name}`}
+          >
+            <span className={styles.titleOverlay} aria-hidden="true" />
             {project.name}
           </Link>
         </h3>
@@ -84,13 +89,13 @@ export default function ProjectCard({ project, href }) {
 
       <div className={styles.footer}>
         <span className={styles.date}>{project.date}</span>
-        <div className={styles.links} onClick={(e) => e.stopPropagation()}>
+        <div className={styles.links}>
           {project.github && (
             <a
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className={styles.link}
+              className={classNames(styles.link, styles.linkRelative)}
             >
               GitHub →
             </a>
@@ -100,7 +105,7 @@ export default function ProjectCard({ project, href }) {
               href={project.live}
               target="_blank"
               rel="noopener noreferrer"
-              className={styles.link}
+              className={classNames(styles.link, styles.linkRelative)}
             >
               Live →
             </a>
