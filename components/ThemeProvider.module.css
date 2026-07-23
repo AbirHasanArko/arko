@@ -14,7 +14,10 @@
 }
 
 .revealing {
-  animation: curtainReveal 700ms cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  /* Slower, more narratively-paced curtain reveal. The ease curve eases in
+     hard and eases out hard so the curtain reads as a deliberate wipe rather
+     than a quick pop. */
+  animation: curtainReveal 1300ms cubic-bezier(0.83, 0, 0.17, 1) forwards;
 }
 
 @keyframes curtainReveal {
@@ -23,7 +26,7 @@
     -webkit-clip-path: circle(0px at var(--anchor-x, 50%) var(--anchor-y, 50%));
     opacity: 1;
   }
-  45% {
+  60% {
     clip-path: circle(150% at var(--anchor-x, 50%) var(--anchor-y, 50%));
     -webkit-clip-path: circle(150% at var(--anchor-x, 50%) var(--anchor-y, 50%));
     opacity: 1;

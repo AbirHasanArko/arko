@@ -111,13 +111,14 @@ export default function ThemeProvider({ children }) {
       overlay.offsetWidth;
       overlay.classList.add(styles.revealing);
 
-      // Switch theme at the midpoint of the curtain reveal so the user sees
-      // the page already in the new theme when the curtain starts receding.
+      // Switch theme near the midpoint of the curtain reveal so the user sees
+      // the page already in the new theme when the curtain lingers fully
+      // visible before fading.
       window.setTimeout(() => {
         applyTheme(toTheme);
         setThemeState(toTheme);
         setPending(null);
-      }, 320);
+      }, 650);
     },
     [applyTheme],
   );
