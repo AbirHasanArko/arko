@@ -36,9 +36,6 @@ export default function PhotoCard() {
               />
             </span>
             <span className={styles.frontBar}>
-              <span className={styles.captionName}>
-                {profile.universityShort} &apos;27
-              </span>
               <span className={styles.hint}>
                 Tap to flip <span className={styles.flipGlyph} aria-hidden="true">↻</span>
               </span>

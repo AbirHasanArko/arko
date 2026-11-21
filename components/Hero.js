@@ -33,7 +33,7 @@ export default function Hero() {
             <div className={`${styles.eyebrowRow} ${styles.stagger1}`}>
               <span className={styles.statusDot} aria-hidden="true" />
               <span className={styles.eyebrowText}>
-                {profile.location} · {profile.universityShort} CSE &apos;27
+                {profile.location} · {profile.universityShort} CSE
               </span>
             </div>
 
