@@ -11,28 +11,28 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className={styles.inner}>
         <div className={styles.col}>
-          <p className={styles.heading}>// signal</p>
+          <p className={styles.brand}>{profile.name}</p>
           <p className={styles.text}>
-            Currently shipping from <strong>Khulna, Bangladesh</strong>.
-            Open to collaboration on AI tooling, backend systems, and developer
+            Shipping software from <strong>{profile.location}</strong>. Open to
+            collaborations across AI tooling, backend systems, and developer
             education.
           </p>
         </div>
 
         <div className={styles.col}>
-          <p className={styles.heading}>// links</p>
+          <p className={styles.heading}>Navigation</p>
           <ul className={styles.linkList}>
             <li><Link href="/projects">Projects</Link></li>
-            <li><Link href="/blog">Blog</Link></li>
-            <li><Link href="/academics">Education</Link></li>
             <li><Link href="/experience">Experience</Link></li>
+            <li><Link href="/academics">Education</Link></li>
             <li><Link href="/credentials">Credentials</Link></li>
+            <li><Link href="/blog">Blog</Link></li>
             <li><Link href="/contact">Contact</Link></li>
           </ul>
         </div>
 
         <div className={styles.col}>
-          <p className={styles.heading}>// socials</p>
+          <p className={styles.heading}>Elsewhere</p>
           <ul className={styles.socialList}>
             {socials.map(([name, href]) => {
               const Icon = getSocialIcon(name);
@@ -44,7 +44,6 @@ export default function Footer() {
                     rel="noopener noreferrer"
                     className={styles.socialLink}
                     aria-label={name}
-                    title={name}
                   >
                     {Icon ? <Icon className={styles.socialIcon} /> : null}
                     <span className={styles.socialLabel}>{name}</span>
@@ -57,10 +56,8 @@ export default function Footer() {
       </div>
 
       <div className={styles.bottom}>
-        <p>
-          © {year} {profile.name}. Built with Next.js · Deployed on Vercel.
-        </p>
-        <p className={styles.tagline}>// {profile.tagline}</p>
+        <p className="tabular">© {year} {profile.name}</p>
+        <p className={styles.tagline}>{profile.tagline}</p>
       </div>
     </footer>
   );

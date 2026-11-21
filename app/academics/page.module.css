@@ -1,94 +1,140 @@
 .crossLinks {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
-  margin: 20px 0 0;
+  gap: 10px;
+  margin: 22px 0 0;
 }
 
 .crossLinks a {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  color: var(--accent);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-secondary);
   text-decoration: none;
-  padding: 6px 14px;
-  border: 1px solid var(--accent);
+  padding: 7px 14px;
+  border: 1px solid var(--border);
+  background: var(--surface);
   border-radius: 999px;
-  transition: background 160ms ease, color 160ms ease;
+  transition:
+    transform 120ms var(--ease-out),
+    border-color 150ms ease,
+    color 150ms ease,
+    background-color 150ms ease;
 }
 
-.crossLinks a:hover {
-  background: var(--accent);
-  color: var(--bg-dark);
+.crossLinks a:active {
+  transform: scale(0.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .crossLinks a:hover {
+    border-color: var(--border-strong);
+    background: var(--surface-subtle);
+    color: var(--text);
+  }
+}
+
+.courseGrid {
+  list-style: none;
+  margin: 20px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.courseItem {
+  padding: 13px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 780px) {
+  .courseGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .courseGrid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .ctaSection {
   margin-top: 80px;
+  padding-top: 48px;
+  border-top: 1px solid var(--border);
 }
 
 .ctaTitle {
   font-family: var(--font-display);
-  font-size: clamp(24px, 3vw, 32px);
-  font-weight: 700;
-  margin: 0 0 6px;
-}
-
-.ctaText {
-  font-family: var(--font-mono);
-  font-size: 14px;
-  color: var(--text-muted);
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
   margin: 0 0 24px;
-  max-width: 640px;
 }
 
 .ctaGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
 }
 
-@media (max-width: 880px) {
-  .ctaGrid { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (max-width: 540px) {
-  .ctaGrid { grid-template-columns: 1fr; }
+@media (max-width: 760px) {
+  .ctaGrid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .ctaCard {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  padding: 20px;
+  padding: 22px;
   border: 1px solid var(--border);
   background: var(--surface);
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xs);
   text-decoration: none;
   color: var(--text);
-  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+  transition: transform 180ms var(--ease-out), border-color 180ms ease;
 }
 
-.ctaCard:hover {
-  transform: translate(-2px, -2px);
-  border-color: var(--accent);
-  box-shadow: 4px 4px 0 var(--accent);
+.ctaCard:active {
+  transform: scale(0.99);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ctaCard:hover {
+    border-color: var(--border-strong);
+    transform: translateY(-2px);
+  }
+
+  .ctaCard:hover .ctaLabel {
+    color: var(--accent);
+  }
 }
 
 .ctaEyebrow {
   font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--accent);
+  font-size: 11px;
+  color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.05em;
 }
 
 .ctaLabel {
   font-family: var(--font-display);
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  transition: color 150ms ease;
 }
 
 .ctaHint {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--text-muted);
+  font-size: 13.5px;
+  color: var(--text-secondary);
 }

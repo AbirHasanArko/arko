@@ -1,4 +1,4 @@
-import { JetBrains_Mono, Playfair_Display } from 'next/font/google';
+import { Inter, JetBrains_Mono, Newsreader } from 'next/font/google';
 import { profile } from '@/data/profile';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -18,16 +18,23 @@ const themeInitScript = `
 })();
 `;
 
+const sans = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-sans',
+});
+
+const display = Newsreader({
+  subsets: ['latin'],
+  display: 'swap',
+  style: ['normal', 'italic'],
+  variable: '--font-display',
+});
+
 const mono = JetBrains_Mono({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-mono',
-});
-
-const display = Playfair_Display({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-display',
 });
 
 export const metadata = {
@@ -64,26 +71,29 @@ export const metadata = {
   },
   robots: { index: true, follow: true },
   icons: {
-    icon: [
-      { url: '/favicon.svg', type: 'image/svg+xml' },
-    ],
+    icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
     apple: '/favicon.svg',
   },
 };
 
 export const viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#F5F0E8' },
-    { media: '(prefers-color-scheme: dark)', color: '#1A1A2E' },
+    { media: '(prefers-color-scheme: light)', color: '#FAF8F5' },
+    { media: '(prefers-color-scheme: dark)', color: '#0C0C0D' },
   ],
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',
+  interactiveWidget: 'resizes-content',
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${mono.variable} ${display.variable}`} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${sans.variable} ${display.variable} ${mono.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>

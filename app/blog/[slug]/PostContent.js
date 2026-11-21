@@ -1,20 +1,23 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 export default function ReadingProgress() {
+  const barRef = useRef(null);
+
   useEffect(() => {
     const onScroll = () => {
+      const node = barRef.current;
+      if (!node) return;
       const h = document.documentElement;
       const total = h.scrollHeight - h.clientHeight;
-      const pct = total > 0 ? (h.scrollTop / total) * 100 : 0;
-      const bar = document.getElementById('reading-progress');
-      if (bar) bar.style.width = `${pct}%`;
+      const ratio = total > 0 ? Math.min(1, Math.max(0, h.scrollTop / total)) : 0;
+      node.style.transform = `scaleX(${ratio})`;
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  return <div id="reading-progress" className="reading-progress" />;
+  return <div ref={barRef} className="reading-progress" aria-hidden="true" />;
 }

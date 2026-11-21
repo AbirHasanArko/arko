@@ -1,69 +1,62 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Signal Lost — 404',
+  title: 'Page Not Found — 404',
 };
 
 export default function NotFound() {
   return (
     <div
       style={{
-        maxWidth: 720,
+        maxWidth: 640,
         margin: '0 auto',
         padding: '120px 24px',
         textAlign: 'center',
       }}
     >
-      <pre
-        style={{
-          fontFamily: 'var(--font-mono)',
-          fontSize: 14,
-          color: 'var(--accent)',
-          margin: '0 0 32px',
-          lineHeight: 1.4,
-        }}
-      >
-{`  ╔═══════════════════════════╗
-  ║   S I G N A L   L O S T   ║
-  ╚═══════════════════════════╝`}
-      </pre>
+      <p className="page-eyebrow" style={{ marginBottom: 16 }}>
+        Error 404
+      </p>
       <h1
         style={{
           fontFamily: 'var(--font-display)',
-          fontSize: 'clamp(48px, 8vw, 96px)',
+          fontSize: 'clamp(2.5rem, 6vw, 4rem)',
           margin: 0,
-          fontWeight: 800,
-          letterSpacing: '-0.02em',
+          fontWeight: 500,
+          letterSpacing: '-0.03em',
+          lineHeight: 1.05,
         }}
       >
-        404
+        This page doesn&apos;t exist.
       </h1>
       <p
         style={{
-          fontFamily: 'var(--font-mono)',
-          color: 'var(--text-muted)',
+          color: 'var(--text-secondary)',
           fontSize: 16,
-          margin: '20px 0 32px',
+          lineHeight: 1.65,
+          maxWidth: '42ch',
+          margin: '18px auto 32px',
         }}
       >
-        The page you're looking for isn't here. Maybe the URL drifted, or the
-        signal faded.
+        The link may be outdated or the address might have moved.
       </p>
       <Link
         href="/"
         style={{
-          display: 'inline-block',
-          padding: '12px 24px',
-          background: 'var(--bg-dark)',
-          color: 'var(--accent)',
-          border: '1px solid var(--bg-dark)',
-          borderRadius: 8,
-          fontFamily: 'var(--font-mono)',
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: 8,
+          padding: '11px 22px',
+          background: 'var(--btn-primary-bg)',
+          color: 'var(--btn-primary-fg)',
+          border: '1px solid var(--btn-primary-bg)',
+          borderRadius: 999,
           fontSize: 14,
+          fontWeight: 500,
           textDecoration: 'none',
         }}
       >
-        ← Return to base
+        ← Back to home
       </Link>
     </div>
   );

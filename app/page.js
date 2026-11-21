@@ -3,13 +3,12 @@ import Hero from '@/components/Hero';
 import ProjectCard from '@/components/ProjectCard';
 import PhotoCard from '@/components/PhotoCard';
 import SkillTicker from '@/components/SkillTicker';
-import ScrollReveal from '@/components/ScrollReveal';
 import { projects } from '@/data/projects';
 import { experience } from '@/data/academics';
 import styles from './page.module.css';
 
 export const metadata = {
-  title: 'Home · Abir Hasan Arko',
+  title: 'Abir Hasan Arko — Software Systems & Applied AI',
 };
 
 export default function HomePage() {
@@ -21,136 +20,118 @@ export default function HomePage() {
       <Hero />
 
       <div className="page-shell">
-        <ScrollReveal>
-          <section className={styles.bioStrip}>
-            <p>
-              <span className={styles.prompt}>$</span> I design software systems,
-              ship backend services, and build AI workflows that hold up in
-              production.
-            </p>
-          </section>
-        </ScrollReveal>
-
-        <SkillTicker />
-
-        <section className={styles.recentWorkSection}>
-          <ScrollReveal>
-            <div className={styles.sectionHeader}>
-              <div>
-                <p className="section-heading">// currently</p>
-                <h2 className="section-title">Recent Work</h2>
-              </div>
-              <Link href="/experience" className={styles.sectionLink}>
-                Full timeline →
-              </Link>
+        <section className={styles.sectionBlock}>
+          <div className={styles.sectionHeader}>
+            <div>
+              <p className="section-heading">Currently</p>
+              <h2 className="section-title">Active Roles</h2>
             </div>
-          </ScrollReveal>
+            <Link href="/experience" className={styles.sectionLink}>
+              <span>Full timeline</span>
+              <span className={styles.linkArrow} aria-hidden="true">→</span>
+            </Link>
+          </div>
+
           <div className={styles.recentWorkGrid}>
-            {recentWork.map((role, i) => (
-              <ScrollReveal key={`${role.org}-${role.role}`} delay={i * 0.05}>
-                <article className={styles.recentWorkCard}>
-                  <span className={styles.recentWorkBadge}>active</span>
-                  <h3 className={styles.recentWorkRole}>{role.role}</h3>
-                  <p className={styles.recentWorkOrg}>
-                    {role.org} · {role.location}
-                  </p>
-                  <p className={styles.recentWorkDates}>
+            {recentWork.map((role) => (
+              <article
+                key={`${role.org}-${role.role}`}
+                className={styles.recentWorkCard}
+              >
+                <div className={styles.recentWorkTop}>
+                  <span className={styles.activeTag}>
+                    <span className={styles.activeDot} aria-hidden="true" />
+                    Active
+                  </span>
+                  <span className={`${styles.recentWorkDates} tabular`}>
                     {role.start} — {role.end}
-                  </p>
-                  <ul className={styles.recentWorkBullets}>
-                    {role.bullets.slice(0, 2).map((b) => (
-                      <li key={b}>{b}</li>
-                    ))}
-                  </ul>
-                </article>
-              </ScrollReveal>
+                  </span>
+                </div>
+                <h3 className={styles.recentWorkRole}>{role.role}</h3>
+                <p className={styles.recentWorkOrg}>
+                  {role.org} · {role.location}
+                </p>
+                <ul className={styles.recentWorkBullets}>
+                  {role.bullets.slice(0, 2).map((b) => (
+                    <li key={b}>{b}</li>
+                  ))}
+                </ul>
+              </article>
             ))}
           </div>
         </section>
 
-        <section className="section">
-          <ScrollReveal>
-            <div className={styles.sectionHeader}>
-              <div>
-                <p className="section-heading">// featured work</p>
-                <h2 className="section-title">Selected Projects</h2>
-              </div>
-              <Link href="/projects" className={styles.sectionLink}>
-                All projects →
-              </Link>
+        <section className={styles.sectionBlock}>
+          <div className={styles.sectionHeader}>
+            <div>
+              <p className="section-heading">Selected Work</p>
+              <h2 className="section-title">Featured Projects</h2>
             </div>
-          </ScrollReveal>
+            <Link href="/projects" className={styles.sectionLink}>
+              <span>All projects</span>
+              <span className={styles.linkArrow} aria-hidden="true">→</span>
+            </Link>
+          </div>
 
           <div className={styles.projectGrid}>
             {featured.map((p) => (
-              <ScrollReveal key={p.slug} delay={0.05}>
-                <ProjectCard project={p} href={`/projects/${p.slug}`} />
-              </ScrollReveal>
+              <ProjectCard key={p.slug} project={p} href={`/projects/${p.slug}`} />
             ))}
           </div>
-
-          <ScrollReveal delay={0.1}>
-            <p className={styles.viewAll}>
-              <Link href="/projects" className={styles.viewAllLink}>
-                View all projects →
-              </Link>
-            </p>
-          </ScrollReveal>
         </section>
 
-        <section className={styles.photoSection}>
-          <ScrollReveal>
-            <div className={styles.photoLayout}>
-              <div>
-                <p className="section-heading">// about</p>
-                <h2 className="section-title">Hi, I'm Abir.</h2>
-                <p className={styles.about}>
-                  I'm a CSE undergraduate at <strong>KUET</strong> building reliable,
-                  user-focused software — from hospital management platforms and
-                  LLM-powered validators to a custom 32-bit processor in Logisim.
-                  I run <strong>Arcode</strong>, where I teach programming in Bengali,
-                  and I'm currently a Machine Learning intern at{' '}
-                  <strong>FlyRank AI</strong>.
-                </p>
-                <div className={styles.aboutLinks}>
-                  <Link href="/experience" className={styles.inlineLink}>
-                    See my journey →
-                  </Link>
-                  <Link href="/blog" className={styles.inlineLink}>
-                    Read the blog →
-                  </Link>
-                  <Link href="/projects" className={styles.inlineLink}>
-                    Browse projects →
-                  </Link>
-                </div>
+        <section className={styles.sectionBlock}>
+          <SkillTicker />
+        </section>
+
+        <section className={styles.sectionBlock}>
+          <div className={styles.photoLayout}>
+            <div className={styles.aboutBody}>
+              <p className="section-heading">About</p>
+              <h2 className="section-title">Hi, I&apos;m Abir.</h2>
+              <p className={styles.about}>
+                I&apos;m a Computer Science undergraduate at <strong>KUET</strong>{' '}
+                building reliable, user-focused software — from hospital
+                management platforms and LLM-powered tool-call validators to a
+                custom 32-bit processor in Logisim.
+              </p>
+              <p className={styles.about}>
+                Outside coursework, I run <strong>Arcode</strong> to teach
+                programming in Bengali and work as a Machine Learning intern at{' '}
+                <strong>FlyRank AI</strong>.
+              </p>
+              <div className={styles.aboutLinks}>
+                <Link href="/experience" className={styles.inlineLink}>
+                  Experience →
+                </Link>
+                <Link href="/blog" className={styles.inlineLink}>
+                  Writing →
+                </Link>
+                <Link href="/credentials" className={styles.inlineLink}>
+                  Credentials →
+                </Link>
               </div>
-              <PhotoCard />
             </div>
-          </ScrollReveal>
+            <PhotoCard />
+          </div>
         </section>
 
         <section className={styles.ctaSection}>
-          <ScrollReveal>
-            <h2 className={styles.ctaTitle}>Let's build something.</h2>
-            <p className={styles.ctaText}>
-              Open to collaborations on AI tooling, backend systems, and developer
-              education.
-            </p>
-            <div className={styles.ctaButtons}>
-              <Link href="/projects" className={styles.ctaPrimary}>
-                Browse Projects
-              </Link>
-              <Link href="/blog" className={styles.ctaGhost}>
-                Read the Blog
-              </Link>
-              <Link href="/contact" className={styles.ctaGhost}>
-                Contact
-              </Link>
-              <Link href="/experience" className={styles.ctaGhost}>
-                My Background
-              </Link>
-            </div>
-          </ScrollReveal>
+          <p className="section-heading">Collaborate</p>
+          <h2 className={styles.ctaTitle}>Let&apos;s build something together.</h2>
+          <p className={styles.ctaText}>
+            Open to conversations around AI tooling, backend systems, and
+            developer education.
+          </p>
+          <div className={styles.ctaButtons}>
+            <Link href="/contact" className={styles.ctaPrimary}>
+              <span>Get in touch</span>
+              <span className={styles.linkArrow} aria-hidden="true">→</span>
+            </Link>
+            <Link href="/projects" className={styles.ctaGhost}>
+              Browse projects
+            </Link>
+          </div>
         </section>
       </div>
     </>

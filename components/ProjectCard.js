@@ -1,103 +1,70 @@
-'use client';
-
-import { useRef } from 'react';
 import Link from 'next/link';
-import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import { classNames } from '@/lib/utils';
 import styles from './ProjectCard.module.css';
 
-const MAX_TILT = 8;
-
 export default function ProjectCard({ project, href }) {
   const cardHref = href || (project.slug ? `/projects/${project.slug}` : null);
-  const ref = useRef(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const rX = useSpring(useTransform(y, [-0.5, 0.5], [MAX_TILT, -MAX_TILT]), {
-    stiffness: 150,
-    damping: 18,
-  });
-  const rY = useSpring(useTransform(x, [-0.5, 0.5], [-MAX_TILT, MAX_TILT]), {
-    stiffness: 150,
-    damping: 18,
-  });
-
-  const handleMouseMove = (e) => {
-    const node = ref.current;
-    if (!node) return;
-    const rect = node.getBoundingClientRect();
-    const px = (e.clientX - rect.left) / rect.width - 0.5;
-    const py = (e.clientY - rect.top) / rect.height - 0.5;
-    x.set(px);
-    y.set(py);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
 
   return (
-    <motion.article
-      ref={ref}
-      className={styles.card}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{ rotateX: rX, rotateY: rY, transformStyle: 'preserve-3d' }}
-    >
-      <div className={styles.header}>
-        <span className={styles.emoji} aria-hidden="true">
-          {project.emoji}
+    <article className={styles.card}>
+      <div className={styles.topRow}>
+        <span className={`${styles.meta} tabular`}>
+          {project.category} · {project.date}
         </span>
-        <div className={styles.badges}>
-          {project.featured && (
-            <span className={classNames(styles.badge, styles.featured)}>
-              featured
-            </span>
-          )}
-          {project.status === 'ongoing' && (
-            <span className={classNames(styles.badge, styles.ongoing)}>
-              ongoing
-            </span>
-          )}
-        </div>
+        {project.status === 'ongoing' ? (
+          <span className={classNames(styles.status, styles.ongoing)}>
+            <span className={styles.statusDot} aria-hidden="true" />
+            Ongoing
+          </span>
+        ) : project.featured ? (
+          <span className={classNames(styles.status, styles.featured)}>
+            Selected
+          </span>
+        ) : null}
       </div>
 
-      {cardHref ? (
-        <h3 className={classNames(styles.title, styles.titleAsText)}>
-          <Link
-            href={cardHref}
-            className={styles.titleLink}
-            aria-label={`Open ${project.name}`}
-          >
-            <span className={styles.titleOverlay} aria-hidden="true" />
-            {project.name}
-          </Link>
-        </h3>
-      ) : (
-        <h3 className={styles.title}>{project.name}</h3>
-      )}
+      <div className={styles.titleRow}>
+        {cardHref ? (
+          <h3 className={styles.title}>
+            <Link
+              href={cardHref}
+              className={styles.titleLink}
+              aria-label={`Open ${project.name}`}
+            >
+              <span className={styles.titleOverlay} aria-hidden="true" />
+              {project.name}
+            </Link>
+          </h3>
+        ) : (
+          <h3 className={styles.title}>{project.name}</h3>
+        )}
+        {cardHref && (
+          <span className={styles.cornerArrow} aria-hidden="true">
+            ↗
+          </span>
+        )}
+      </div>
+
       <p className={styles.description}>{project.description}</p>
 
       <ul className={styles.tech} aria-label={`${project.name} tech stack`}>
-        {project.tech.map((t) => (
+        {project.tech.slice(0, 5).map((t) => (
           <li key={t} className={styles.techItem}>
             {t}
           </li>
         ))}
       </ul>
 
-      <div className={styles.footer}>
-        <span className={styles.date}>{project.date}</span>
-        <div className={styles.links}>
+      {(project.github || project.live) && (
+        <div className={styles.footer}>
           {project.github && (
             <a
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className={classNames(styles.link, styles.linkRelative)}
+              className={styles.extLink}
             >
-              GitHub →
+              GitHub ↗
             </a>
           )}
           {project.live && (
@@ -105,13 +72,13 @@ export default function ProjectCard({ project, href }) {
               href={project.live}
               target="_blank"
               rel="noopener noreferrer"
-              className={classNames(styles.link, styles.linkRelative)}
+              className={styles.extLink}
             >
-              Live →
+              Live demo ↗
             </a>
           )}
         </div>
-      </div>
-    </motion.article>
+      )}
+    </article>
   );
 }

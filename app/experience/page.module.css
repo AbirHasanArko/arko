@@ -1,86 +1,102 @@
 .crossLinks {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
-  margin: 20px 0 0;
+  gap: 10px;
+  margin: 22px 0 0;
 }
 
 .crossLinks a {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  color: var(--accent);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-secondary);
   text-decoration: none;
-  padding: 6px 14px;
-  border: 1px solid var(--accent);
+  padding: 7px 14px;
+  border: 1px solid var(--border);
+  background: var(--surface);
   border-radius: 999px;
-  transition: background 160ms ease, color 160ms ease;
+  transition:
+    transform 120ms var(--ease-out),
+    border-color 150ms ease,
+    color 150ms ease,
+    background-color 150ms ease;
 }
 
-.crossLinks a:hover {
-  background: var(--accent);
-  color: var(--bg-dark);
+.crossLinks a:active {
+  transform: scale(0.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .crossLinks a:hover {
+    border-color: var(--border-strong);
+    background: var(--surface-subtle);
+    color: var(--text);
+  }
 }
 
 .skillsLede {
-  font-family: var(--font-mono);
-  font-size: 14px;
-  color: var(--text-muted);
-  max-width: 60ch;
-  margin: 0 0 32px;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  max-width: 58ch;
+  margin: 0 0 28px;
 }
 
 .skillsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
+  gap: 18px;
 }
 
 .skillCategory {
-  padding: 22px 22px 18px;
+  padding: 22px 24px;
   border: 1px solid var(--border);
-  border-radius: 14px;
+  border-radius: var(--radius-lg);
   background: var(--surface);
-  box-shadow: 4px 4px 0 var(--border);
+  box-shadow: var(--shadow-xs);
   height: 100%;
 }
 
 .skillCategoryTitle {
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 11.5px;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--accent);
-  margin: 0 0 14px;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin: 0 0 18px;
 }
 
 .skillList {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
 .ctaSection {
   margin-top: 80px;
-  padding: 40px 32px;
+  padding: 44px 32px;
   border: 1px solid var(--border);
-  border-radius: 16px;
-  background: var(--bg-dark);
-  color: #f1ece2;
+  border-radius: var(--radius-xl);
+  background: var(--surface);
+  box-shadow: var(--shadow-xs);
   text-align: center;
 }
 
 .ctaTitle {
   font-family: var(--font-display);
-  font-size: clamp(24px, 3vw, 32px);
-  color: var(--accent);
-  margin: 0 0 12px;
+  font-size: clamp(1.6rem, 3vw, 2.15rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin: 0 0 10px;
 }
 
 .ctaText {
-  font-family: var(--font-mono);
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.75);
-  margin: 0 0 24px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 48ch;
+  margin: 0 auto 24px;
 }
 
 .ctaButtons {
@@ -92,32 +108,44 @@
 
 .ctaPrimary,
 .ctaGhost {
-  padding: 12px 22px;
-  border-radius: 8px;
-  font-family: var(--font-mono);
+  padding: 10px 20px;
+  border-radius: 999px;
   font-size: 14px;
+  font-weight: 500;
   text-decoration: none;
-  transition: transform 160ms ease, box-shadow 160ms ease;
+  transition:
+    transform 140ms var(--ease-out),
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease;
 }
 
 .ctaPrimary {
-  background: var(--accent);
-  color: var(--bg-dark);
-  border: 1px solid var(--accent);
-}
-
-.ctaPrimary:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 4px 4px 0 rgba(255, 255, 255, 0.4);
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-fg);
+  border: 1px solid var(--btn-primary-bg);
 }
 
 .ctaGhost {
   background: transparent;
-  color: #f1ece2;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
 }
 
-.ctaGhost:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+.ctaPrimary:active,
+.ctaGhost:active {
+  transform: scale(0.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ctaPrimary:hover {
+    background: var(--btn-primary-hover);
+    border-color: var(--btn-primary-hover);
+  }
+
+  .ctaGhost:hover {
+    border-color: var(--border-strong);
+    background: var(--surface-subtle);
+    color: var(--text);
+  }
 }

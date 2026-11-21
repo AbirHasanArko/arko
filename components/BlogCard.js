@@ -6,7 +6,7 @@ export default function BlogCard({ post }) {
   const { slug, frontmatter, readingTime } = post;
   return (
     <Link href={`/blog/${slug}`} className={styles.card}>
-      <p className={styles.meta}>
+      <p className={`${styles.meta} tabular`}>
         <time>{formatDate(frontmatter.date)}</time>
         <span className={styles.dot} aria-hidden="true">·</span>
         <span>{readingTime || frontmatter.readingTime || '— min read'}</span>
@@ -16,11 +16,14 @@ export default function BlogCard({ post }) {
       {frontmatter.tags && frontmatter.tags.length > 0 && (
         <ul className={styles.tags}>
           {frontmatter.tags.map((t) => (
-            <li key={t} className={styles.tag}>#{t}</li>
+            <li key={t} className={styles.tag}>{t}</li>
           ))}
         </ul>
       )}
-      <span className={styles.readMore}>Read post →</span>
+      <span className={styles.readMore}>
+        <span>Read article</span>
+        <span className={styles.arrow} aria-hidden="true">→</span>
+      </span>
     </Link>
   );
 }

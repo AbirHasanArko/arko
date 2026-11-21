@@ -1,44 +1,51 @@
 .back {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 12.5px;
   color: var(--text-muted);
   text-decoration: none;
-  margin-bottom: 32px;
-  transition: color 160ms ease;
+  margin-bottom: 28px;
+  transition: color 150ms ease;
 }
 
-.back:hover { color: var(--accent); }
+@media (hover: hover) and (pointer: fine) {
+  .back:hover {
+    color: var(--text);
+  }
+}
 
 .header {
-  margin-bottom: 48px;
+  max-width: 65ch;
+  margin-bottom: 44px;
   padding-bottom: 32px;
-  border-bottom: 1px dashed var(--border);
+  border-bottom: 1px solid var(--border);
 }
 
 .meta {
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
   color: var(--text-muted);
-  margin: 0 0 16px;
+  margin: 0 0 14px;
   display: flex;
+  align-items: center;
   gap: 8px;
 }
 
 .title {
-  font-size: clamp(32px, 5vw, 52px);
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  font-size: clamp(2rem, 4.6vw, 3.1rem);
+  font-weight: 500;
+  letter-spacing: -0.025em;
   margin: 0 0 16px;
-  line-height: 1.15;
+  line-height: 1.1;
 }
 
 .excerpt {
-  font-size: 18px;
-  color: var(--text-muted);
-  line-height: 1.6;
+  font-size: 17.5px;
+  color: var(--text-secondary);
+  line-height: 1.62;
   margin: 0 0 20px;
-  max-width: 720px;
 }
 
 .tags {
@@ -52,29 +59,34 @@
 
 .tags li {
   font-family: var(--font-mono);
-  font-size: 12px;
-  padding: 4px 10px;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: var(--bg);
-  color: var(--text);
+  font-size: 11.5px;
+  padding: 3px 10px;
+  border-radius: 6px;
+  background: var(--surface-subtle);
+  color: var(--text-secondary);
 }
 
 .body {
-  margin: 0 auto;
+  margin: 0;
 }
 
 .footer {
+  max-width: 65ch;
   margin-top: 64px;
-  padding-top: 32px;
-  border-top: 1px dashed var(--border);
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
 }
 
 .footerLink {
   font-family: var(--font-mono);
-  font-size: 14px;
+  font-size: 13px;
   color: var(--accent);
   text-decoration: none;
+  transition: color 150ms ease;
 }
 
-.footerLink:hover { color: var(--accent-hover); }
+@media (hover: hover) and (pointer: fine) {
+  .footerLink:hover {
+    color: var(--accent-hover);
+  }
+}

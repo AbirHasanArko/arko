@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import Timeline from '@/components/Timeline';
-import ScrollReveal from '@/components/ScrollReveal';
-import { education } from '@/data/academics';
+import { education, coursework } from '@/data/academics';
 import styles from './page.module.css';
 
 export const metadata = {
@@ -13,62 +12,57 @@ export const metadata = {
 export default function AcademicsPage() {
   return (
     <div className="page-shell">
-      <ScrollReveal>
-        <header className="page-header">
-          <p className="page-eyebrow">// education</p>
-          <h1 className="page-title">Education</h1>
-          <p className="page-lede">
-            A timeline of schools, programs, and the grades that shaped my
-            engineering journey.
-          </p>
-          <nav className={styles.crossLinks} aria-label="Related sections">
-            <Link href="/experience">Work Experience →</Link>
-            <Link href="/credentials">Credentials & Achievements →</Link>
-          </nav>
-        </header>
-      </ScrollReveal>
+      <header className="page-header">
+        <p className="page-eyebrow">Education</p>
+        <h1 className="page-title">Academic Background</h1>
+        <p className="page-lede">
+          A timeline of schools, programs, and core computer science foundations
+          that shaped my engineering path.
+        </p>
+        <nav className={styles.crossLinks} aria-label="Related sections">
+          <Link href="/experience">Work Experience →</Link>
+          <Link href="/credentials">Credentials &amp; Achievements →</Link>
+        </nav>
+      </header>
 
       <section className="section">
-        <ScrollReveal delay={0.1}>
-          <Timeline items={education} type="education" />
-        </ScrollReveal>
+        <Timeline items={education} type="education" />
       </section>
 
+      {coursework && coursework.length > 0 && (
+        <section className="section">
+          <p className="section-heading">KUET CSE</p>
+          <h2 className="section-title">Selected Coursework</h2>
+          <ul className={styles.courseGrid}>
+            {coursework.map((course) => (
+              <li key={course} className={styles.courseItem}>
+                {course}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       <section className={styles.ctaSection}>
-        <ScrollReveal>
-          <h2 className={styles.ctaTitle}>Keep exploring</h2>
-          <p className={styles.ctaText}>
-            Jump straight to my work history, credentials, or other corners of
-            the site.
-          </p>
-          <div className={styles.ctaGrid}>
-            <Link href="/experience" className={styles.ctaCard}>
-              <span className={styles.ctaEyebrow}>// experience</span>
-              <span className={styles.ctaLabel}>Work Experience</span>
-              <span className={styles.ctaHint}>Internships, leadership, ventures</span>
-            </Link>
-            <Link href="/credentials" className={styles.ctaCard}>
-              <span className={styles.ctaEyebrow}>// credentials</span>
-              <span className={styles.ctaLabel}>Credentials & Achievements</span>
-              <span className={styles.ctaHint}>Certs, hackathons, scholarships</span>
-            </Link>
-            <Link href="/projects" className={styles.ctaCard}>
-              <span className={styles.ctaEyebrow}>// projects</span>
-              <span className={styles.ctaLabel}>Projects</span>
-              <span className={styles.ctaHint}>10+ builds across web, AI, hardware</span>
-            </Link>
-            <Link href="/blog" className={styles.ctaCard}>
-              <span className={styles.ctaEyebrow}>// blog</span>
-              <span className={styles.ctaLabel}>Blog</span>
-              <span className={styles.ctaHint}>Notes on AI, CP, and building</span>
-            </Link>
-            <Link href="/contact" className={styles.ctaCard}>
-              <span className={styles.ctaEyebrow}>// contact</span>
-              <span className={styles.ctaLabel}>Get in touch</span>
-              <span className={styles.ctaHint}>Email, phone, socials</span>
-            </Link>
-          </div>
-        </ScrollReveal>
+        <p className="section-heading">Explore</p>
+        <h2 className={styles.ctaTitle}>Continue browsing</h2>
+        <div className={styles.ctaGrid}>
+          <Link href="/experience" className={styles.ctaCard}>
+            <span className={styles.ctaEyebrow}>Experience</span>
+            <span className={styles.ctaLabel}>Work History</span>
+            <span className={styles.ctaHint}>Internships, leadership, ventures</span>
+          </Link>
+          <Link href="/credentials" className={styles.ctaCard}>
+            <span className={styles.ctaEyebrow}>Credentials</span>
+            <span className={styles.ctaLabel}>Certifications &amp; Wins</span>
+            <span className={styles.ctaHint}>Certs, hackathons, scholarships</span>
+          </Link>
+          <Link href="/projects" className={styles.ctaCard}>
+            <span className={styles.ctaEyebrow}>Projects</span>
+            <span className={styles.ctaLabel}>Selected Builds</span>
+            <span className={styles.ctaHint}>Web, applied AI, and hardware</span>
+          </Link>
+        </div>
       </section>
     </div>
   );

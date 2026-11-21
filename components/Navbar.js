@@ -14,7 +14,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -24,53 +24,96 @@ export default function Navbar() {
     setOpen(false);
   }, [pathname]);
 
+  useEffect(() => {
+    if (!open) return undefined;
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [open]);
+
   return (
-    <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
-      <div className={styles.inner}>
-        <Link href="/" className={styles.brand} aria-label={`${profile.name} home`}>
-          <span className={styles.brandMark} aria-hidden="true">
-            <span className={styles.brandMarkLetter}>A</span>
-            <span className={styles.brandMarkDot} />
-          </span>
-          <span className={styles.brandText}>{profile.name}</span>
-        </Link>
+    <>
+      <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
+        <div className={styles.inner}>
+          <Link href="/" className={styles.brand} aria-label={`${profile.name} home`}>
+            <span className={styles.brandName}>{profile.name}</span>
+          </Link>
 
-        <nav className={`${styles.nav} ${open ? styles.open : ''}`} aria-label="Primary">
-          <ul className={styles.navList}>
-            {navigation.map((item) => {
-              const isActive =
-                item.href === '/'
-                  ? pathname === '/'
-                  : pathname.startsWith(item.href);
-              return (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className={`${styles.link} ${isActive ? styles.active : ''}`}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              );
-            })}
-            <li>
-              <ThemeToggle />
-            </li>
-          </ul>
-        </nav>
+          <nav className={styles.desktopNav} aria-label="Primary">
+            <ul className={styles.navList}>
+              {navigation.map((item) => {
+                const isActive =
+                  item.href === '/'
+                    ? pathname === '/'
+                    : pathname.startsWith(item.href);
+                return (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className={`${styles.link} ${isActive ? styles.active : ''}`}
+                      aria-current={isActive ? 'page' : undefined}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
 
-        <button
-          type="button"
-          className={styles.toggle}
-          aria-label="Toggle navigation"
-          aria-expanded={open}
-          onClick={() => setOpen((o) => !o)}
-        >
-          <span className={`${styles.bar} ${open ? styles.bar1Open : ''}`} />
-          <span className={`${styles.bar} ${open ? styles.bar2Open : ''}`} />
-          <span className={`${styles.bar} ${open ? styles.bar3Open : ''}`} />
-        </button>
-      </div>
-    </header>
+          <div className={styles.controls}>
+            <ThemeToggle />
+            <button
+              type="button"
+              className={styles.toggle}
+              aria-label={open ? 'Close navigation' : 'Open navigation'}
+              aria-expanded={open}
+              aria-controls="mobile-nav"
+              onClick={() => setOpen((o) => !o)}
+            >
+              <span className={`${styles.bar} ${open ? styles.bar1Open : ''}`} />
+              <span className={`${styles.bar} ${open ? styles.bar2Open : ''}`} />
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div
+        className={`${styles.backdrop} ${open ? styles.backdropOpen : ''}`}
+        onClick={() => setOpen(false)}
+        aria-hidden="true"
+      />
+
+      <nav
+        id="mobile-nav"
+        className={`${styles.mobileNav} ${open ? styles.mobileNavOpen : ''}`}
+        aria-label="Mobile navigation"
+        aria-hidden={!open}
+      >
+        <ul className={styles.mobileList}>
+          {navigation.map((item) => {
+            const isActive =
+              item.href === '/'
+                ? pathname === '/'
+                : pathname.startsWith(item.href);
+            return (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  tabIndex={open ? 0 : -1}
+                  className={`${styles.mobileLink} ${isActive ? styles.mobileActive : ''}`}
+                  aria-current={isActive ? 'page' : undefined}
+                >
+                  <span>{item.label}</span>
+                  <span className={styles.mobileArrow} aria-hidden="true">→</span>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+    </>
   );
 }

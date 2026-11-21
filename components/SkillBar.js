@@ -9,7 +9,7 @@ export default function SkillBar({ name, level }) {
 
   useEffect(() => {
     const node = ref.current;
-    if (!node) return;
+    if (!node) return undefined;
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -19,22 +19,24 @@ export default function SkillBar({ name, level }) {
           }
         });
       },
-      { threshold: 0.4 }
+      { threshold: 0.25 },
     );
     observer.observe(node);
     return () => observer.disconnect();
   }, []);
 
+  const ratio = Math.max(0, Math.min(1, level / 100));
+
   return (
     <div ref={ref} className={styles.row}>
       <div className={styles.head}>
         <span className={styles.name}>{name}</span>
-        <span className={styles.level}>{level}%</span>
+        <span className={`${styles.level} tabular`}>{level}%</span>
       </div>
       <div className={styles.track} aria-hidden="true">
         <div
           className={styles.fill}
-          style={{ width: active ? `${level}%` : '0%' }}
+          style={{ transform: `scaleX(${active ? ratio : 0})` }}
         />
       </div>
     </div>

@@ -43,33 +43,28 @@ export default async function ProjectDetailPage({ params }) {
       </Link>
 
       <header className={styles.header}>
-        <div className={styles.heading}>
-          <span className={styles.emoji} aria-hidden="true">
-            {project.emoji}
+        <div className={styles.metaRow}>
+          <span className={`${styles.eyebrow} tabular`}>
+            {project.category} · {project.date}
           </span>
-          <div className={styles.headingText}>
-            <p className={styles.eyebrow}>// {project.category}</p>
-            <h1 className={styles.title}>{project.name}</h1>
-          </div>
+          <ul className={styles.badges} aria-label="Project status">
+            {project.featured && (
+              <li className={classNames(styles.badge, styles.badgeFeatured)}>
+                Selected
+              </li>
+            )}
+            {project.status && (
+              <li className={classNames(styles.badge, styles.badgeStatus)}>
+                {project.status}
+              </li>
+            )}
+          </ul>
         </div>
 
-        <ul className={styles.badges} aria-label="project status">
-          {project.featured && (
-            <li className={classNames(styles.badge, styles.badgeFeatured)}>featured</li>
-          )}
-          {project.status && (
-            <li className={classNames(styles.badge, styles.badgeStatus)}>
-              {project.status}
-            </li>
-          )}
-          {project.date && (
-            <li className={classNames(styles.badge, styles.badgeMuted)}>{project.date}</li>
-          )}
-        </ul>
-
+        <h1 className={styles.title}>{project.name}</h1>
         <p className={styles.summary}>{project.description}</p>
 
-        <ul className={styles.tech} aria-label="tech stack">
+        <ul className={styles.tech} aria-label="Tech stack">
           {project.tech.map((t) => (
             <li key={t} className={styles.techItem}>
               {t}
@@ -77,34 +72,36 @@ export default async function ProjectDetailPage({ params }) {
           ))}
         </ul>
 
-        <div className={styles.actions}>
-          {project.github && (
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.btnPrimary}
-            >
-              View source ↗
-            </a>
-          )}
-          {project.live && (
-            <a
-              href={project.live}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.btnGhost}
-            >
-              Live demo ↗
-            </a>
-          )}
-        </div>
+        {(project.github || project.live) && (
+          <div className={styles.actions}>
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.btnPrimary}
+              >
+                View source ↗
+              </a>
+            )}
+            {project.live && (
+              <a
+                href={project.live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.btnGhost}
+              >
+                Live demo ↗
+              </a>
+            )}
+          </div>
+        )}
       </header>
 
       {project.demoEmbed && (
         <section className={styles.demo}>
-          <p className="section-heading">// live demo</p>
-          <h2 className="section-title">Try it</h2>
+          <p className="section-heading">Interactive</p>
+          <h2 className="section-title">Live Demo</h2>
           <span className={styles.iframeWrap}>
             <iframe
               src={project.demoEmbed}
@@ -154,22 +151,16 @@ export default async function ProjectDetailPage({ params }) {
         )}
       </section>
 
-      <footer className={styles.footer}>
-        <Link href="/projects" className={styles.footerLink}>
-          ← All projects
-        </Link>
-      </footer>
-
       {others.length > 0 && (
         <section className={styles.others}>
-          <p className="section-heading">// more work</p>
-          <h2 className="section-title">Other projects</h2>
+          <p className="section-heading">Continue Reading</p>
+          <h2 className="section-title">Other Projects</h2>
           <ul className={styles.othersGrid}>
             {others.map((p) => (
               <li key={p.slug}>
                 <Link href={`/projects/${p.slug}`} className={styles.otherCard}>
-                  <span className={styles.otherEmoji} aria-hidden="true">
-                    {p.emoji}
+                  <span className={`${styles.otherMeta} tabular`}>
+                    {p.category} · {p.date}
                   </span>
                   <span className={styles.otherName}>{p.name}</span>
                   <span className={styles.otherDesc}>{p.description}</span>

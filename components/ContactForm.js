@@ -17,7 +17,7 @@ export default function ContactForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setStatus({ state: 'sending', message: 'Transmitting...' });
+    setStatus({ state: 'sending', message: 'Sending your message...' });
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
@@ -26,13 +26,13 @@ export default function ContactForm() {
       });
       const data = await res.json();
       if (!res.ok) {
-        throw new Error(data?.error || 'Transmission failed');
+        throw new Error(data?.error || 'Could not send message.');
       }
       setStatus({
         state: 'sent',
         message: data?.fallback
-          ? 'Message logged. Email delivery is offline, but I will read it soon.'
-          : 'Message sent. Expect a reply soon.',
+          ? 'Message logged. Email delivery is offline right now, but I will read it soon.'
+          : 'Message sent. Expect a reply within a day or two.',
       });
       setForm(initial);
     } catch (err) {
@@ -47,10 +47,12 @@ export default function ContactForm() {
     <form className={styles.form} onSubmit={handleSubmit} noValidate>
       <div className={styles.row}>
         <label className={styles.field}>
-          <span className={styles.label}>name</span>
+          <span className={styles.label}>Name</span>
           <input
             type="text"
             name="name"
+            autoComplete="name"
+            enterKeyHint="next"
             value={form.name}
             onChange={handleChange}
             required
@@ -59,10 +61,14 @@ export default function ContactForm() {
           />
         </label>
         <label className={styles.field}>
-          <span className={styles.label}>email</span>
+          <span className={styles.label}>Email</span>
           <input
             type="email"
             name="email"
+            autoComplete="email"
+            autoCapitalize="none"
+            autoCorrect="off"
+            enterKeyHint="next"
             value={form.email}
             onChange={handleChange}
             required
@@ -72,9 +78,10 @@ export default function ContactForm() {
         </label>
       </div>
       <label className={styles.field}>
-        <span className={styles.label}>message</span>
+        <span className={styles.label}>Message</span>
         <textarea
           name="message"
+          enterKeyHint="send"
           value={form.message}
           onChange={handleChange}
           required
@@ -89,7 +96,10 @@ export default function ContactForm() {
           className={styles.submit}
           disabled={status.state === 'sending'}
         >
-          {status.state === 'sending' ? 'Sending...' : 'Send message →'}
+          <span>{status.state === 'sending' ? 'Sending...' : 'Send message'}</span>
+          {status.state !== 'sending' && (
+            <span className={styles.arrow} aria-hidden="true">→</span>
+          )}
         </button>
         <a href={`mailto:${profile.email}`} className={styles.directEmail}>
           or email {profile.email}
@@ -101,6 +111,7 @@ export default function ContactForm() {
             status.state === 'error' ? styles.errorText : styles.okText
           }`}
           role="status"
+          aria-live="polite"
         >
           {status.message}
         </p>

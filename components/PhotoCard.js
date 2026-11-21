@@ -1,57 +1,49 @@
-'use client';
-
-import { useState } from 'react';
 import { profile } from '@/data/profile';
 import { getSocialIcon } from '@/lib/icons';
 import styles from './PhotoCard.module.css';
 
+const FEATURED_SOCIALS = ['github', 'linkedin', 'twitter', 'youtube', 'huggingface'];
+
 export default function PhotoCard() {
-  const [flipped, setFlipped] = useState(false);
-  const socials = Object.entries(profile.socials || {});
+  const socials = FEATURED_SOCIALS.filter((k) => profile.socials?.[k]).map((k) => [
+    k,
+    profile.socials[k],
+  ]);
 
   return (
-    <div className={styles.wrap}>
-      <button
-        type="button"
-        className={`${styles.card} ${flipped ? styles.flipped : ''}`}
-        onClick={() => setFlipped((f) => !f)}
-        aria-pressed={flipped}
-        aria-label="Flip photo card"
-      >
-        <div className={`${styles.face} ${styles.front}`}>
-          <div className={styles.photo}>
-            <img
-              src="/IMG_3821 (3).JPG"
-              alt={profile.name}
-              className={styles.photoImg}
-              loading="lazy"
-            />
-          </div>
-          <p className={styles.hint}>tap to flip</p>
-        </div>
-        <div className={`${styles.face} ${styles.back}`}>
-          <p className={styles.backHeading}>// find me here</p>
-          <ul className={styles.socials}>
-            {socials.map(([name, href]) => {
-              const Icon = getSocialIcon(name);
-              return (
-                <li key={name}>
-                  <a
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.socialLink}
-                    aria-label={name}
-                  >
-                    {Icon ? <Icon className={styles.socialIcon} /> : null}
-                    <span>{name}</span>
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      </button>
-    </div>
+    <figure className={styles.figure}>
+      <div className={styles.frame}>
+        <img
+          src="/IMG_3821 (3).JPG"
+          alt={profile.name}
+          className={styles.photoImg}
+          loading="lazy"
+        />
+      </div>
+      <figcaption className={styles.caption}>
+        <span className={styles.captionName}>
+          {profile.name} · {profile.universityShort} &apos;27
+        </span>
+        <ul className={styles.socials} aria-label="Social links">
+          {socials.map(([name, href]) => {
+            const Icon = getSocialIcon(name);
+            return (
+              <li key={name}>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.socialLink}
+                  aria-label={name}
+                  title={name}
+                >
+                  {Icon ? <Icon className={styles.socialIcon} /> : name}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </figcaption>
+    </figure>
   );
 }

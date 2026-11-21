@@ -6,30 +6,39 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-bottom: 6px;
+  margin-bottom: 7px;
 }
 
 .name {
-  font-family: var(--font-mono);
   font-size: 14px;
+  font-weight: 450;
   color: var(--text);
 }
 
 .level {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 11.5px;
   color: var(--text-muted);
 }
 
 .track {
-  height: 8px;
+  height: 4px;
   border-radius: 999px;
-  background: var(--border);
+  background: var(--surface-subtle);
   overflow: hidden;
 }
 
 .fill {
+  width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, var(--accent), var(--secondary));
-  transition: width 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: inherit;
+  background: var(--accent);
+  transform-origin: left center;
+  transition: transform 420ms var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fill {
+    transition: none;
+  }
 }

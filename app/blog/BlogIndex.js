@@ -3,7 +3,6 @@
 import { useMemo, useState } from 'react';
 import BlogCard from '@/components/BlogCard';
 import FilterBar from '@/components/FilterBar';
-import ScrollReveal from '@/components/ScrollReveal';
 import styles from './page.module.css';
 
 export default function BlogIndex({ posts, tags: initialTags }) {
@@ -17,16 +16,14 @@ export default function BlogIndex({ posts, tags: initialTags }) {
 
   return (
     <div className="page-shell">
-      <ScrollReveal>
-        <header className="page-header">
-          <p className="page-eyebrow">// dispatches</p>
-          <h1 className="page-title">Blog</h1>
-          <p className="page-lede">
-            Notes on AI, backend engineering, and the craft of shipping software
-            that lasts.
-          </p>
-        </header>
-      </ScrollReveal>
+      <header className="page-header">
+        <p className="page-eyebrow">Writing</p>
+        <h1 className="page-title">Blog</h1>
+        <p className="page-lede">
+          Notes on applied AI, backend architecture, and the craft of shipping
+          software that lasts.
+        </p>
+      </header>
 
       {tags.length > 1 && (
         <FilterBar filters={tags} active={active} onChange={setActive} />
@@ -36,10 +33,8 @@ export default function BlogIndex({ posts, tags: initialTags }) {
         <p className={styles.empty}>No posts yet. Stay tuned.</p>
       ) : (
         <div className={styles.grid}>
-          {filtered.map((p, i) => (
-            <ScrollReveal key={p.slug} delay={i * 0.05}>
-              <BlogCard post={p} />
-            </ScrollReveal>
+          {filtered.map((p) => (
+            <BlogCard key={p.slug} post={p} />
           ))}
         </div>
       )}
