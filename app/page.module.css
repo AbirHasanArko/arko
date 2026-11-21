@@ -5,8 +5,7 @@
 .sectionHeader {
   display: flex;
   align-items: baseline;
-  justify-content: space-between;
-  gap: 16px;
+  gap: 12px;
   margin-bottom: 22px;
 }
 

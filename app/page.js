@@ -22,14 +22,12 @@ export default function HomePage() {
 
       <div className="page-shell">
         <section className={styles.sectionBlock}>
-          <div className="monograph-bar">
-            <span className="monograph-index">§ 01 · Research &amp; Inquiry</span>
-            <span className="monograph-rule" aria-hidden="true" />
-          </div>
           <div className={styles.sectionHeader}>
-            <h2 className="section-title">Current Technical Studies</h2>
+            <span className="monograph-index tabular">§ 01</span>
+            <h2 className="section-title">Research &amp; Inquiry</h2>
+            <span className="monograph-rule" aria-hidden="true" />
             <Link href="/research" className={styles.sectionLink}>
-              <span>All research notes</span>
+              <span>All notes</span>
               <span className={styles.linkArrow} aria-hidden="true">→</span>
             </Link>
           </div>
@@ -62,14 +60,12 @@ export default function HomePage() {
         </section>
 
         <section className={styles.sectionBlock}>
-          <div className="monograph-bar">
-            <span className="monograph-index">§ 02 · Selected Systems</span>
-            <span className="monograph-rule" aria-hidden="true" />
-          </div>
           <div className={styles.sectionHeader}>
-            <h2 className="section-title">Featured Projects</h2>
+            <span className="monograph-index tabular">§ 02</span>
+            <h2 className="section-title">Selected Projects</h2>
+            <span className="monograph-rule" aria-hidden="true" />
             <Link href="/projects" className={styles.sectionLink}>
-              <span>Full archive</span>
+              <span>All projects</span>
               <span className={styles.linkArrow} aria-hidden="true">→</span>
             </Link>
           </div>
@@ -87,12 +83,10 @@ export default function HomePage() {
         </section>
 
         <section className={styles.sectionBlock}>
-          <div className="monograph-bar">
-            <span className="monograph-index">§ 03 · Experience &amp; Teaching</span>
-            <span className="monograph-rule" aria-hidden="true" />
-          </div>
           <div className={styles.sectionHeader}>
+            <span className="monograph-index tabular">§ 03</span>
             <h2 className="section-title">Active Roles</h2>
+            <span className="monograph-rule" aria-hidden="true" />
             <Link href="/experience" className={styles.sectionLink}>
               <span>Full timeline</span>
               <span className={styles.linkArrow} aria-hidden="true">→</span>
@@ -129,7 +123,7 @@ export default function HomePage() {
         </section>
 
         <section className={styles.sectionBlock}>
-          <SkillTicker indexLabel="§ 04 · Technical Index" />
+          <SkillTicker sectionNum="§ 04" />
         </section>
 
         <section className={styles.closingNote}>

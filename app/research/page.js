@@ -16,7 +16,6 @@ export default function ResearchPage() {
   return (
     <div className="page-shell">
       <header className="page-header">
-        <p className="page-eyebrow">Research &amp; Inquiry</p>
         <h1 className="page-title">Research</h1>
         <p className="page-lede">
           Exploring where theoretical computer science meets reliable systems —
@@ -27,10 +26,10 @@ export default function ResearchPage() {
 
       <section className="section">
         <div className="monograph-bar">
-          <span className="monograph-index">§ 01 · Focus Areas</span>
+          <span className="monograph-index tabular">§ 01</span>
+          <h2 className="section-title">Lines of Inquiry</h2>
           <span className="monograph-rule" aria-hidden="true" />
         </div>
-        <h2 className="section-title">Lines of Inquiry</h2>
 
         <div className={styles.pillarsGrid}>
           {researchInterests.map((pillar) => (
@@ -45,10 +44,10 @@ export default function ResearchPage() {
 
       <section className="section">
         <div className="monograph-bar">
-          <span className="monograph-index">§ 02 · Technical Studies &amp; Artifacts</span>
+          <span className="monograph-index tabular">§ 02</span>
+          <h2 className="section-title">Technical Studies &amp; Artifacts</h2>
           <span className="monograph-rule" aria-hidden="true" />
         </div>
-        <h2 className="section-title">Ongoing &amp; Completed Work</h2>
 
         <ol className={styles.notesList}>
           {researchNotes.map((item) => (

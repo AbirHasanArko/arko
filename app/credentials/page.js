@@ -12,7 +12,6 @@ export default function CredentialsPage() {
   return (
     <div className="page-shell">
       <header className="page-header">
-        <p className="page-eyebrow">Credentials</p>
         <h1 className="page-title">Credentials &amp; Honors</h1>
         <p className="page-lede">
           Verified coursework, academic scholarships, hackathon placings, and
@@ -22,10 +21,10 @@ export default function CredentialsPage() {
 
       <section id="certifications" className="section">
         <div className="monograph-bar">
-          <span className="monograph-index">§ 01 · Certifications</span>
+          <span className="monograph-index tabular">§ 01</span>
+          <h2 className="section-title">Certifications</h2>
           <span className="monograph-rule" aria-hidden="true" />
         </div>
-        <h2 className="section-title">Completed Programs</h2>
         <div className={styles.certGrid}>
           {certifications.map((cert) => (
             <CertificateCard key={cert.name} cert={cert} />
@@ -35,10 +34,10 @@ export default function CredentialsPage() {
 
       <section id="achievements" className="section">
         <div className="monograph-bar">
-          <span className="monograph-index">§ 02 · Honors &amp; Milestones</span>
+          <span className="monograph-index tabular">§ 02</span>
+          <h2 className="section-title">Honors &amp; Milestones</h2>
           <span className="monograph-rule" aria-hidden="true" />
         </div>
-        <h2 className="section-title">Notable Wins</h2>
         <div className={styles.achievementGrid}>
           {achievements.map((a) => (
             <article key={a.title} className={styles.achievement}>

@@ -53,7 +53,6 @@ export default function PhotoCard() {
           onClick={toggle}
         >
           <div className={styles.backHeader}>
-            <p className={styles.backEyebrow}>Elsewhere</p>
             <p className={styles.backTitle}>Find me online</p>
           </div>
 

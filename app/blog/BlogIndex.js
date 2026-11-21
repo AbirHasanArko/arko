@@ -17,7 +17,6 @@ export default function BlogIndex({ posts, tags: initialTags }) {
   return (
     <div className="page-shell">
       <header className="page-header">
-        <p className="page-eyebrow">Writing</p>
         <h1 className="page-title">Blog</h1>
         <p className="page-lede">
           Notes on applied AI, backend architecture, and the craft of shipping

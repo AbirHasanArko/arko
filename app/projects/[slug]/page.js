@@ -100,8 +100,10 @@ export default async function ProjectDetailPage({ params }) {
 
       {project.demoEmbed && (
         <section className={styles.demo}>
-          <p className="section-heading">Interactive</p>
-          <h2 className="section-title">Live Demo</h2>
+          <div className="monograph-bar">
+            <h2 className="section-title">Live Demo</h2>
+            <span className="monograph-rule" aria-hidden="true" />
+          </div>
           <span className={styles.iframeWrap}>
             <iframe
               src={project.demoEmbed}
@@ -153,8 +155,10 @@ export default async function ProjectDetailPage({ params }) {
 
       {others.length > 0 && (
         <section className={styles.others}>
-          <p className="section-heading">Continue Reading</p>
-          <h2 className="section-title">Other Projects</h2>
+          <div className="monograph-bar">
+            <h2 className="section-title">Other Projects</h2>
+            <span className="monograph-rule" aria-hidden="true" />
+          </div>
           <ul className={styles.othersGrid}>
             {others.map((p) => (
               <li key={p.slug}>

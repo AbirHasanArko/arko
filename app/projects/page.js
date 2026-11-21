@@ -31,7 +31,6 @@ export default function ProjectsPage() {
   return (
     <div className="page-shell">
       <header className="page-header">
-        <p className="page-eyebrow">Archive</p>
         <h1 className="page-title">Projects</h1>
         <p className="page-lede">
           Systems I&apos;ve designed, stress-tested, and shipped — from hospital

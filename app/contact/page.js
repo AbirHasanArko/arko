@@ -22,7 +22,6 @@ export default function ContactPage() {
   return (
     <div className="page-shell">
       <header className="page-header">
-        <p className="page-eyebrow">Contact</p>
         <h1 className="page-title">Get in touch</h1>
         <p className="page-lede">
           Whether it&apos;s an engineering project, a research collaboration, or
