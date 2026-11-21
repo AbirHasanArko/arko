@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { profile } from '@/data/profile';
+import { navigation } from '@/data/navigation';
 import { getSocialIcon } from '@/lib/icons';
 import styles from './Footer.module.css';
 
@@ -11,23 +12,34 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className={styles.inner}>
         <div className={styles.col}>
-          <p className={styles.brand}>{profile.name}</p>
+          <div className={styles.brandRow}>
+            <img
+              src="/favicon.svg"
+              alt=""
+              width={24}
+              height={24}
+              className={styles.brandLogo}
+              aria-hidden="true"
+            />
+            <p className={styles.brand}>{profile.name}</p>
+          </div>
           <p className={styles.text}>
-            Shipping software from <strong>{profile.location}</strong>. Open to
-            collaborations across AI tooling, backend systems, and developer
-            education.
+            {profile.degree}, {profile.universityShort}. Written, studied, and
+            engineered in <strong>{profile.location}</strong>.
+          </p>
+          <p className={styles.colophon}>
+            Colophon — Set in Newsreader, Inter &amp; JetBrains Mono.
           </p>
         </div>
 
         <div className={styles.col}>
-          <p className={styles.heading}>Navigation</p>
+          <p className={styles.heading}>Index</p>
           <ul className={styles.linkList}>
-            <li><Link href="/projects">Projects</Link></li>
-            <li><Link href="/experience">Experience</Link></li>
-            <li><Link href="/academics">Education</Link></li>
-            <li><Link href="/credentials">Credentials</Link></li>
-            <li><Link href="/blog">Blog</Link></li>
-            <li><Link href="/contact">Contact</Link></li>
+            {navigation.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href}>{item.label}</Link>
+              </li>
+            ))}
           </ul>
         </div>
 

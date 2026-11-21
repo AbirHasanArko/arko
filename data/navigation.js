@@ -1,4 +1,5 @@
 export const navigation = [
+  { label: "Research", href: "/research" },
   { label: "Projects", href: "/projects" },
   { label: "Experience", href: "/experience" },
   { label: "Education", href: "/academics" },

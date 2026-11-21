@@ -38,6 +38,14 @@ export default function Navbar() {
       <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
         <div className={styles.inner}>
           <Link href="/" className={styles.brand} aria-label={`${profile.name} home`}>
+            <img
+              src="/favicon.svg"
+              alt=""
+              width={28}
+              height={28}
+              className={styles.brandLogo}
+              aria-hidden="true"
+            />
             <span className={styles.brandName}>{profile.name}</span>
           </Link>
 

@@ -48,6 +48,7 @@ export const metadata = {
     'Abir Hasan Arko',
     'KUET',
     'Software Engineer',
+    'Research',
     'AI',
     'Backend',
     'Portfolio',
@@ -78,8 +79,8 @@ export const metadata = {
 
 export const viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#FAF8F5' },
-    { media: '(prefers-color-scheme: dark)', color: '#0C0C0D' },
+    { media: '(prefers-color-scheme: light)', color: '#F7F3EB' },
+    { media: '(prefers-color-scheme: dark)', color: '#0E0F11' },
   ],
   width: 'device-width',
   initialScale: 1,

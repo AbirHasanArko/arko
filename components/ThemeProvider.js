@@ -10,8 +10,8 @@ import {
 } from 'react';
 
 const STORAGE_KEY = 'arko-theme';
-const LIGHT_BG = '#FAF8F5';
-const DARK_BG = '#0C0C0D';
+const LIGHT_BG = '#F7F3EB';
+const DARK_BG = '#0E0F11';
 
 const ThemeContext = createContext({
   theme: 'light',

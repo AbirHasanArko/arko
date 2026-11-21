@@ -34,7 +34,7 @@ export default function ProjectsPage() {
         <p className="page-eyebrow">Archive</p>
         <h1 className="page-title">Projects</h1>
         <p className="page-lede">
-          Software I&apos;ve built, stress-tested, and shipped — from hospital
+          Systems I&apos;ve designed, stress-tested, and shipped — from hospital
           platforms and LLM validators to a 32-bit processor in Logisim.
         </p>
       </header>
@@ -45,8 +45,13 @@ export default function ProjectsPage() {
         <p className={styles.empty}>No projects match this filter yet.</p>
       ) : (
         <div className={styles.grid}>
-          {filtered.map((p) => (
-            <ProjectCard key={p.slug} project={p} href={`/projects/${p.slug}`} />
+          {filtered.map((p, idx) => (
+            <ProjectCard
+              key={p.slug}
+              project={p}
+              index={`P-${String(idx + 1).padStart(2, '0')}`}
+              href={`/projects/${p.slug}`}
+            />
           ))}
         </div>
       )}

@@ -1,13 +1,13 @@
 .sectionBlock {
-  margin: 0 0 88px;
+  margin: 0 0 84px;
 }
 
 .sectionHeader {
   display: flex;
-  align-items: flex-end;
+  align-items: baseline;
   justify-content: space-between;
   gap: 16px;
-  margin-bottom: 24px;
+  margin-bottom: 22px;
 }
 
 .sectionLink {
@@ -18,7 +18,7 @@
   font-weight: 500;
   color: var(--text-secondary);
   text-decoration: none;
-  padding-bottom: 4px;
+  white-space: nowrap;
   transition: color 150ms ease;
 }
 
@@ -38,6 +38,107 @@
   }
 }
 
+/* Research preview */
+.researchGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.researchCard {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-xs);
+  transition: border-color 180ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .researchCard:hover {
+    border-color: var(--border-strong);
+  }
+}
+
+.researchTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.researchId {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.researchYear {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+.researchTitle {
+  font-family: var(--font-display);
+  font-size: 21px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+  margin: 0 0 10px;
+}
+
+.researchAbstract {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin: 0 0 18px;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.researchFooter {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.researchLink,
+.researchMutedLink {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+
+.researchLink {
+  color: var(--accent);
+}
+
+.researchMutedLink {
+  color: var(--text-muted);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .researchLink:hover {
+    color: var(--accent-hover);
+  }
+
+  .researchMutedLink:hover {
+    color: var(--text);
+  }
+}
+
+/* Active roles */
 .recentWorkGrid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -121,7 +222,7 @@
 
 .recentWorkBullets li {
   font-size: 13.5px;
-  line-height: 1.55;
+  line-height: 1.56;
   color: var(--text-secondary);
   padding-left: 12px;
   position: relative;
@@ -145,42 +246,31 @@
   align-items: stretch;
 }
 
-.ctaSection {
-  margin-top: 8px;
-  padding: 52px 32px;
+/* Quiet, warm closing invitation */
+.closingNote {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 32px 34px;
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
   background: var(--surface);
   box-shadow: var(--shadow-xs);
-  text-align: center;
 }
 
-.ctaTitle {
+.closingQuote {
   font-family: var(--font-display);
-  font-size: clamp(1.8rem, 3.6vw, 2.5rem);
-  font-weight: 500;
-  letter-spacing: -0.025em;
-  margin: 0 0 12px;
+  font-style: italic;
+  font-size: clamp(1.2rem, 2.2vw, 1.45rem);
+  line-height: 1.45;
   color: var(--text);
+  max-width: 44ch;
+  margin: 0;
 }
 
-.ctaText {
-  font-size: 16px;
-  line-height: 1.6;
-  color: var(--text-secondary);
-  max-width: 48ch;
-  margin: 0 auto 28px;
-}
-
-.ctaButtons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-}
-
-.ctaPrimary,
-.ctaGhost {
+.ctaPrimary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -190,27 +280,17 @@
   font-size: 14px;
   font-weight: 500;
   text-decoration: none;
-  transition:
-    transform 140ms var(--ease-out),
-    background-color 150ms ease,
-    border-color 150ms ease,
-    color 150ms ease;
-}
-
-.ctaPrimary {
   background: var(--btn-primary-bg);
   color: var(--btn-primary-fg);
   border: 1px solid var(--btn-primary-bg);
+  flex-shrink: 0;
+  transition:
+    transform 140ms var(--ease-out),
+    background-color 150ms ease,
+    border-color 150ms ease;
 }
 
-.ctaGhost {
-  background: transparent;
-  color: var(--text-secondary);
-  border: 1px solid var(--border);
-}
-
-.ctaPrimary:active,
-.ctaGhost:active {
+.ctaPrimary:active {
   transform: scale(0.97);
 }
 
@@ -223,12 +303,6 @@
   .ctaPrimary:hover .linkArrow {
     transform: translateX(3px);
   }
-
-  .ctaGhost:hover {
-    border-color: var(--border-strong);
-    background: var(--surface-subtle);
-    color: var(--text);
-  }
 }
 
 @media (max-width: 900px) {
@@ -239,14 +313,15 @@
 
 @media (max-width: 760px) {
   .sectionBlock {
-    margin-bottom: 64px;
+    margin-bottom: 60px;
   }
 
+  .researchGrid,
   .projectGrid {
     grid-template-columns: 1fr;
   }
 
-  .ctaSection {
-    padding: 36px 20px;
+  .closingNote {
+    padding: 24px 20px;
   }
 }

@@ -4,6 +4,7 @@ import ProjectCard from '@/components/ProjectCard';
 import SkillTicker from '@/components/SkillTicker';
 import { projects } from '@/data/projects';
 import { experience } from '@/data/academics';
+import { researchNotes } from '@/data/research';
 import styles from './page.module.css';
 
 export const metadata = {
@@ -13,6 +14,7 @@ export const metadata = {
 export default function HomePage() {
   const featured = projects.filter((p) => p.featured).slice(0, 4);
   const recentWork = experience.filter((e) => e.current).slice(0, 3);
+  const featuredResearch = researchNotes.slice(0, 2);
 
   return (
     <>
@@ -20,11 +22,77 @@ export default function HomePage() {
 
       <div className="page-shell">
         <section className={styles.sectionBlock}>
+          <div className="monograph-bar">
+            <span className="monograph-index">§ 01 · Research &amp; Inquiry</span>
+            <span className="monograph-rule" aria-hidden="true" />
+          </div>
           <div className={styles.sectionHeader}>
-            <div>
-              <p className="section-heading">Currently</p>
-              <h2 className="section-title">Active Roles</h2>
-            </div>
+            <h2 className="section-title">Current Technical Studies</h2>
+            <Link href="/research" className={styles.sectionLink}>
+              <span>All research notes</span>
+              <span className={styles.linkArrow} aria-hidden="true">→</span>
+            </Link>
+          </div>
+
+          <div className={styles.researchGrid}>
+            {featuredResearch.map((item) => (
+              <article key={item.id} className={styles.researchCard}>
+                <div className={styles.researchTop}>
+                  <span className={`${styles.researchId} tabular`}>[{item.id}]</span>
+                  <span className={`${styles.researchYear} tabular`}>{item.year}</span>
+                </div>
+                <h3 className={styles.researchTitle}>{item.title}</h3>
+                <p className={styles.researchAbstract}>{item.abstract}</p>
+                <div className={styles.researchFooter}>
+                  <Link href="/research" className={styles.researchLink}>
+                    Read note →
+                  </Link>
+                  {item.projectSlug && (
+                    <Link
+                      href={`/projects/${item.projectSlug}`}
+                      className={styles.researchMutedLink}
+                    >
+                      Artifact
+                    </Link>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className={styles.sectionBlock}>
+          <div className="monograph-bar">
+            <span className="monograph-index">§ 02 · Selected Systems</span>
+            <span className="monograph-rule" aria-hidden="true" />
+          </div>
+          <div className={styles.sectionHeader}>
+            <h2 className="section-title">Featured Projects</h2>
+            <Link href="/projects" className={styles.sectionLink}>
+              <span>Full archive</span>
+              <span className={styles.linkArrow} aria-hidden="true">→</span>
+            </Link>
+          </div>
+
+          <div className={styles.projectGrid}>
+            {featured.map((p, idx) => (
+              <ProjectCard
+                key={p.slug}
+                project={p}
+                index={`P-0${idx + 1}`}
+                href={`/projects/${p.slug}`}
+              />
+            ))}
+          </div>
+        </section>
+
+        <section className={styles.sectionBlock}>
+          <div className="monograph-bar">
+            <span className="monograph-index">§ 03 · Experience &amp; Teaching</span>
+            <span className="monograph-rule" aria-hidden="true" />
+          </div>
+          <div className={styles.sectionHeader}>
+            <h2 className="section-title">Active Roles</h2>
             <Link href="/experience" className={styles.sectionLink}>
               <span>Full timeline</span>
               <span className={styles.linkArrow} aria-hidden="true">→</span>
@@ -61,44 +129,18 @@ export default function HomePage() {
         </section>
 
         <section className={styles.sectionBlock}>
-          <div className={styles.sectionHeader}>
-            <div>
-              <p className="section-heading">Selected Work</p>
-              <h2 className="section-title">Featured Projects</h2>
-            </div>
-            <Link href="/projects" className={styles.sectionLink}>
-              <span>All projects</span>
-              <span className={styles.linkArrow} aria-hidden="true">→</span>
-            </Link>
-          </div>
-
-          <div className={styles.projectGrid}>
-            {featured.map((p) => (
-              <ProjectCard key={p.slug} project={p} href={`/projects/${p.slug}`} />
-            ))}
-          </div>
+          <SkillTicker indexLabel="§ 04 · Technical Index" />
         </section>
 
-        <section className={styles.sectionBlock}>
-          <SkillTicker />
-        </section>
-
-        <section className={styles.ctaSection}>
-          <p className="section-heading">Collaborate</p>
-          <h2 className={styles.ctaTitle}>Let&apos;s build something together.</h2>
-          <p className={styles.ctaText}>
-            Open to conversations around AI tooling, backend systems, and
-            developer education.
+        <section className={styles.closingNote}>
+          <p className={styles.closingQuote}>
+            Always glad to talk research, quiet engineering, or teaching over a
+            cup of tea or an email.
           </p>
-          <div className={styles.ctaButtons}>
-            <Link href="/contact" className={styles.ctaPrimary}>
-              <span>Get in touch</span>
-              <span className={styles.linkArrow} aria-hidden="true">→</span>
-            </Link>
-            <Link href="/projects" className={styles.ctaGhost}>
-              Browse projects
-            </Link>
-          </div>
+          <Link href="/contact" className={styles.ctaPrimary}>
+            <span>Say hello</span>
+            <span className={styles.linkArrow} aria-hidden="true">→</span>
+          </Link>
         </section>
       </div>
     </>

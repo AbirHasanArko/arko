@@ -1,47 +1,47 @@
 :root {
-  /* Light palette — Warm Studio Paper */
-  --bg: #FAF8F5;
-  --bg-dark: #151413;
-  --surface: #FFFFFF;
-  --surface-subtle: #F2EEE8;
-  --surface-hover: #F7F4EF;
-  --header-bg: rgba(250, 248, 245, 0.8);
+  /* Light palette — Sunlit Archival Paper */
+  --bg: #F7F3EB;
+  --bg-dark: #171614;
+  --surface: #FCFBF7;
+  --surface-subtle: #EFEAE0;
+  --surface-hover: #F4EFE6;
+  --header-bg: rgba(247, 243, 235, 0.82);
 
-  --text: #151413;
-  --text-secondary: #4B4742;
-  --text-muted: #767069;
+  --text: #171614;
+  --text-secondary: #4E4942;
+  --text-muted: #787168;
 
-  --accent: #B84D24;
-  --accent-hover: #963B18;
-  --accent-soft: rgba(184, 77, 36, 0.08);
-  --accent-border: rgba(184, 77, 36, 0.22);
+  --accent: #A84824;
+  --accent-hover: #893718;
+  --accent-soft: rgba(168, 72, 36, 0.08);
+  --accent-border: rgba(168, 72, 36, 0.24);
 
-  --secondary: #2B6B4A;
-  --secondary-soft: rgba(43, 107, 74, 0.09);
-  --secondary-border: rgba(43, 107, 74, 0.22);
+  --secondary: #2F684A;
+  --secondary-soft: rgba(47, 104, 74, 0.09);
+  --secondary-border: rgba(47, 104, 74, 0.22);
 
-  --danger: #B03224;
-  --danger-soft: rgba(176, 50, 36, 0.09);
+  --danger: #AC3124;
+  --danger-soft: rgba(172, 49, 36, 0.09);
 
-  --border: rgba(21, 20, 19, 0.09);
-  --border-strong: rgba(21, 20, 19, 0.17);
-  --code-bg: #181716;
-  --code-fg: #F2EFEA;
+  --border: rgba(23, 22, 20, 0.09);
+  --border-strong: rgba(23, 22, 20, 0.17);
+  --code-bg: #1B1A18;
+  --code-fg: #F2EDE4;
 
-  --btn-primary-bg: #151413;
-  --btn-primary-fg: #FAF8F5;
-  --btn-primary-hover: #2A2826;
+  --btn-primary-bg: #171614;
+  --btn-primary-fg: #F7F3EB;
+  --btn-primary-hover: #2C2A26;
 
-  --shadow-xs: 0 1px 2px rgba(21, 20, 19, 0.04);
+  --shadow-xs: 0 1px 2px rgba(23, 22, 20, 0.035);
   --shadow-sm:
-    0 1px 2px rgba(21, 20, 19, 0.04),
-    0 4px 12px rgba(21, 20, 19, 0.04);
+    0 1px 2px rgba(23, 22, 20, 0.04),
+    0 4px 12px rgba(23, 22, 20, 0.04);
   --shadow-md:
-    0 2px 4px rgba(21, 20, 19, 0.04),
-    0 12px 28px rgba(21, 20, 19, 0.07);
+    0 2px 6px rgba(23, 22, 20, 0.04),
+    0 12px 28px rgba(23, 22, 20, 0.07);
 
-  --selection-bg: rgba(184, 77, 36, 0.18);
-  --selection-fg: #151413;
+  --selection-bg: rgba(168, 72, 36, 0.17);
+  --selection-fg: #171614;
 
   /* Typography */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -63,49 +63,49 @@
 }
 
 [data-theme='dark'] {
-  /* Dark palette — Warm Obsidian */
-  --bg: #0C0C0D;
-  --bg-dark: #070708;
-  --surface: #131315;
-  --surface-subtle: #19191C;
-  --surface-hover: #1D1D21;
-  --header-bg: rgba(12, 12, 13, 0.78);
+  /* Dark palette — Late-Night Study */
+  --bg: #0E0F11;
+  --bg-dark: #090A0C;
+  --surface: #151619;
+  --surface-subtle: #1C1E22;
+  --surface-hover: #212328;
+  --header-bg: rgba(14, 15, 17, 0.8);
 
-  --text: #F2EFEA;
-  --text-secondary: #B8B2A9;
-  --text-muted: #847E76;
+  --text: #ECE7DF;
+  --text-secondary: #B7B1A7;
+  --text-muted: #868077;
 
-  --accent: #E69368;
-  --accent-hover: #F2AA84;
-  --accent-soft: rgba(230, 147, 104, 0.11);
-  --accent-border: rgba(230, 147, 104, 0.25);
+  --accent: #E2956B;
+  --accent-hover: #EEA983;
+  --accent-soft: rgba(226, 149, 107, 0.11);
+  --accent-border: rgba(226, 149, 107, 0.26);
 
-  --secondary: #68B88E;
-  --secondary-soft: rgba(104, 184, 142, 0.12);
-  --secondary-border: rgba(104, 184, 142, 0.26);
+  --secondary: #6BB38B;
+  --secondary-soft: rgba(107, 179, 139, 0.12);
+  --secondary-border: rgba(107, 179, 139, 0.26);
 
   --danger: #EB7B6E;
   --danger-soft: rgba(235, 123, 110, 0.12);
 
-  --border: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.16);
-  --code-bg: #151518;
-  --code-fg: #F2EFEA;
+  --border: rgba(236, 231, 223, 0.08);
+  --border-strong: rgba(236, 231, 223, 0.16);
+  --code-bg: #151619;
+  --code-fg: #ECE7DF;
 
-  --btn-primary-bg: #F2EFEA;
-  --btn-primary-fg: #0C0C0D;
+  --btn-primary-bg: #ECE7DF;
+  --btn-primary-fg: #0E0F11;
   --btn-primary-hover: #FFFFFF;
 
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.28);
   --shadow-sm:
     0 1px 2px rgba(0, 0, 0, 0.32),
-    0 6px 16px rgba(0, 0, 0, 0.28);
+    0 6px 16px rgba(0, 0, 0, 0.26);
   --shadow-md:
     0 2px 6px rgba(0, 0, 0, 0.36),
     0 14px 32px rgba(0, 0, 0, 0.42);
 
-  --selection-bg: rgba(230, 147, 104, 0.25);
-  --selection-fg: #F2EFEA;
+  --selection-bg: rgba(226, 149, 107, 0.24);
+  --selection-fg: #ECE7DF;
 
   color-scheme: dark;
 }
@@ -130,7 +130,7 @@ body {
   color: var(--text);
   font-family: var(--font-body);
   font-size: 16px;
-  line-height: 1.6;
+  line-height: 1.62;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -226,7 +226,7 @@ p {
 
 .page-eyebrow {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 500;
   color: var(--accent);
   letter-spacing: 0.06em;
@@ -235,36 +235,60 @@ p {
 }
 
 .page-title {
-  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-size: clamp(2.25rem, 5vw, 3.45rem);
   font-weight: 500;
   letter-spacing: -0.025em;
   line-height: 1.06;
 }
 
 .page-lede {
-  font-size: 17px;
-  line-height: 1.65;
+  font-size: 16.5px;
+  line-height: 1.68;
   color: var(--text-secondary);
   max-width: 60ch;
   margin: 16px 0 0;
 }
 
 .section {
-  margin: 88px 0;
+  margin: 76px 0;
+}
+
+/* Monograph Section Signature — § 01 · Label ──────── */
+.monograph-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 10px;
+}
+
+.monograph-index {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.monograph-rule {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
 }
 
 .section-heading {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 500;
-  color: var(--text-muted);
+  color: var(--accent);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   margin: 0 0 8px;
 }
 
 .section-title {
-  font-size: clamp(1.75rem, 3.2vw, 2.25rem);
+  font-size: clamp(1.7rem, 3.1vw, 2.15rem);
   font-weight: 500;
   letter-spacing: -0.02em;
   margin: 0 0 12px;
@@ -288,7 +312,7 @@ p {
   }
 
   .section {
-    margin: 64px 0;
+    margin: 56px 0;
   }
 
   .grid-2,
@@ -319,7 +343,7 @@ p {
 .prose p,
 .prose li {
   font-size: 16px;
-  line-height: 1.75;
+  line-height: 1.76;
   color: var(--text-secondary);
 }
 
@@ -446,7 +470,6 @@ p {
   pointer-events: none;
 }
 
-/* Entrance choreography utility — off-main-thread CSS, respects reduced motion */
 @keyframes riseIn {
   from {
     opacity: 0;

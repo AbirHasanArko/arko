@@ -2,14 +2,17 @@ import Link from 'next/link';
 import { classNames } from '@/lib/utils';
 import styles from './ProjectCard.module.css';
 
-export default function ProjectCard({ project, href }) {
+export default function ProjectCard({ project, href, index }) {
   const cardHref = href || (project.slug ? `/projects/${project.slug}` : null);
 
   return (
     <article className={styles.card}>
       <div className={styles.topRow}>
         <span className={`${styles.meta} tabular`}>
-          {project.category} · {project.date}
+          {index ? <span className={styles.catalogId}>[{index}]</span> : null}
+          <span>
+            {project.category} · {project.date}
+          </span>
         </span>
         {project.status === 'ongoing' ? (
           <span className={classNames(styles.status, styles.ongoing)}>
