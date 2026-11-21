@@ -17,7 +17,7 @@ export default function PhotoCard() {
           src="/IMG_3821 (3).JPG"
           alt={profile.name}
           className={styles.photoImg}
-          loading="lazy"
+          fetchPriority="high"
         />
       </div>
       <figcaption className={styles.caption}>
